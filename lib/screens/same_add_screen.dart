@@ -4,8 +4,6 @@ import 'package:calculation_game/model/same_add_brain.dart';
 import 'package:flutter/material.dart';
 
 class SameAddScreen extends StatefulWidget {
-  const SameAddScreen({Key? key}) : super(key: key);
-
   @override
   _SameAddScreenState createState() => _SameAddScreenState();
 }

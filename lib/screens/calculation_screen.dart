@@ -8,8 +8,6 @@ import 'package:calculation_game/widget/modeselect_button.dart';
 import 'package:flutter/material.dart';
 
 class CalculationScreen extends StatefulWidget {
-  const CalculationScreen({Key? key}) : super(key: key);
-
   @override
   _CalculationScreenState createState() => _CalculationScreenState();
 }

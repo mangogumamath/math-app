@@ -4,8 +4,6 @@ import 'package:calculation_game/model/different_add_brain.dart';
 import 'package:flutter/material.dart';
 
 class DifferentAddScreen extends StatefulWidget {
-  const DifferentAddScreen({Key? key}) : super(key: key);
-
   @override
   _DifferentAddScreenState createState() => _DifferentAddScreenState();
 }

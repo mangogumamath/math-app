@@ -3,8 +3,6 @@ import 'package:calculation_game/model/calculation_brain.dart';
 import 'package:flutter/material.dart';
 
 class AddScreen extends StatefulWidget {
-  const AddScreen({Key? key}) : super(key: key);
-
   @override
   _AddScreenState createState() => _AddScreenState();
 }
