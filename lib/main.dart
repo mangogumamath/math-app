@@ -22,7 +22,7 @@ class _CalculationGameState extends State<CalculationGame> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'chat used firebase',
+      title: '무한의 계산',
       theme: ThemeData.dark().copyWith(
         textTheme: TextTheme(
           headline1: TextStyle(fontFamily: fontFamily),
@@ -45,7 +45,7 @@ class _CalculationGameState extends State<CalculationGame> {
           length: 2,
           child: Scaffold(
             appBar: AppBar(
-              title: Text('계산은 내가 할게'),
+              title: Text('무한의 계산'),
             ),
             // TabBarView
             body: IndexedStack(
