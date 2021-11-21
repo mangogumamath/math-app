@@ -1,22 +1,22 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/calculation_brain.dart';
+
+import 'package:calculation_game/model/same_add_brain.dart';
 import 'package:flutter/material.dart';
 
-class AddScreen extends StatefulWidget {
+class SameAddScreen extends StatefulWidget {
   @override
-  _AddScreenState createState() => _AddScreenState();
+  _SameAddScreenState createState() => _SameAddScreenState();
 }
 
-class _AddScreenState extends State<AddScreen> {
-  CalculationBrain calBrain = CalculationBrain();
-  TextEditingController _textEditingController = TextEditingController();
+class _SameAddScreenState extends State<SameAddScreen> {
+  SameAddBrain sameAddBrain = SameAddBrain();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    calBrain.resetNumber();
+    sameAddBrain.resetNumber();
   }
 
   @override
@@ -27,15 +27,13 @@ class _AddScreenState extends State<AddScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '맞춘 개수: ' + calBrain.correctCount.toString(),
+            '맞춘 개수: ' + sameAddBrain.correctCount.toString(),
             style: TextStyle(
               fontSize: 50.0,
             ),
           ),
           Text(
-            calBrain.y >= 0
-                ? '${calBrain.x.toString()}+${calBrain.y.toString()} ='
-                : '${calBrain.x.toString()}' + '${calBrain.y.toString()} =',
+            sameAddBrain.questionText,
             style: TextStyle(
               fontSize: 50.0,
             ),
@@ -50,12 +48,13 @@ class _AddScreenState extends State<AddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          calBrain.choiceA_text,
+                          sameAddBrain.choiceA_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            calBrain.checkAnswer(calBrain.choiceA_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceA_value);
                           });
                         },
                       ),
@@ -67,12 +66,13 @@ class _AddScreenState extends State<AddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          calBrain.choiceB_text,
+                          sameAddBrain.choiceB_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            calBrain.checkAnswer(calBrain.choiceB_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceB_value);
                           });
                         },
                       ),
@@ -88,12 +88,13 @@ class _AddScreenState extends State<AddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          calBrain.choiceC_text,
+                          sameAddBrain.choiceC_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            calBrain.checkAnswer(calBrain.choiceC_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceC_value);
                           });
                         },
                       ),
@@ -105,12 +106,13 @@ class _AddScreenState extends State<AddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          calBrain.choiceD_text,
+                          sameAddBrain.choiceD_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            calBrain.checkAnswer(calBrain.choiceD_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceD_value);
                           });
                         },
                       ),

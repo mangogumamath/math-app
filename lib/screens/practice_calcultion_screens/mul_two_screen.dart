@@ -1,23 +1,23 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/calculation_brain.dart';
-import 'package:calculation_game/model/different_add_brain.dart';
+import 'package:calculation_game/model/addsub_brain.dart';
+import 'package:calculation_game/model/mul_two_brain.dart';
+
 import 'package:flutter/material.dart';
 
-class DifferentAddScreen extends StatefulWidget {
+class MulTwoScreen extends StatefulWidget {
   @override
-  _DifferentAddScreenState createState() => _DifferentAddScreenState();
+  _MulTwoScreenState createState() => _MulTwoScreenState();
 }
 
-class _DifferentAddScreenState extends State<DifferentAddScreen> {
-  DifferentAddBrain differentAddBrain = DifferentAddBrain();
-  TextEditingController _textEditingController = TextEditingController();
+class _MulTwoScreenState extends State<MulTwoScreen> {
+  MulTwoBrain mulTwoBrain = MulTwoBrain();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    differentAddBrain.resetNumber();
+    mulTwoBrain.resetNumber();
   }
 
   @override
@@ -28,13 +28,13 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '맞춘 개수: ' + differentAddBrain.correctCount.toString(),
+            '맞춘 개수: ' + mulTwoBrain.correctCount.toString(),
             style: TextStyle(
               fontSize: 50.0,
             ),
           ),
           Text(
-            differentAddBrain.questionText,
+            mulTwoBrain.questionText,
             style: TextStyle(
               fontSize: 50.0,
             ),
@@ -49,13 +49,12 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceA_text,
+                          mulTwoBrain.choiceA_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceA_value);
+                            mulTwoBrain.checkAnswer(mulTwoBrain.choiceA_value);
                           });
                         },
                       ),
@@ -67,13 +66,12 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceB_text,
+                          mulTwoBrain.choiceB_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceB_value);
+                            mulTwoBrain.checkAnswer(mulTwoBrain.choiceB_value);
                           });
                         },
                       ),
@@ -89,13 +87,12 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceC_text,
+                          mulTwoBrain.choiceC_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceC_value);
+                            mulTwoBrain.checkAnswer(mulTwoBrain.choiceC_value);
                           });
                         },
                       ),
@@ -107,13 +104,12 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceD_text,
+                          mulTwoBrain.choiceD_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceD_value);
+                            mulTwoBrain.checkAnswer(mulTwoBrain.choiceD_value);
                           });
                         },
                       ),

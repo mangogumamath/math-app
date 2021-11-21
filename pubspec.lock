@@ -74,13 +74,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  intro_slider:
+  font_awesome_flutter:
     dependency: "direct main"
     description:
-      name: intro_slider
+      name: font_awesome_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "9.2.0"
+  fraction:
+    dependency: "direct main"
+    description:
+      name: fraction
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   lints:
     dependency: transitive
     description:
@@ -172,4 +179,3 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.12.0"

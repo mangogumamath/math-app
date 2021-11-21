@@ -1,23 +1,22 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/calculation_brain.dart';
-import 'package:calculation_game/model/same_add_brain.dart';
+import 'package:calculation_game/model/addsub_brain.dart';
+
 import 'package:flutter/material.dart';
 
-class SameAddScreen extends StatefulWidget {
+class AddSubScreen extends StatefulWidget {
   @override
-  _SameAddScreenState createState() => _SameAddScreenState();
+  _AddSubScreenState createState() => _AddSubScreenState();
 }
 
-class _SameAddScreenState extends State<SameAddScreen> {
-  SameAddBrain sameAddBrain = SameAddBrain();
-  TextEditingController _textEditingController = TextEditingController();
+class _AddSubScreenState extends State<AddSubScreen> {
+  AddSubBrain addSubBrain = AddSubBrain();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    sameAddBrain.resetNumber();
+    addSubBrain.resetNumber();
   }
 
   @override
@@ -28,13 +27,16 @@ class _SameAddScreenState extends State<SameAddScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '맞춘 개수: ' + sameAddBrain.correctCount.toString(),
+            '맞춘 개수: ' + addSubBrain.correctCount.toString(),
             style: TextStyle(
               fontSize: 50.0,
             ),
           ),
           Text(
-            sameAddBrain.questionText,
+            addSubBrain.y >= 0
+                ? '${addSubBrain.x.toString()}+${addSubBrain.y.toString()} ='
+                : '${addSubBrain.x.toString()}' +
+                    '${addSubBrain.y.toString()} =',
             style: TextStyle(
               fontSize: 50.0,
             ),
@@ -49,13 +51,12 @@ class _SameAddScreenState extends State<SameAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          sameAddBrain.choiceA_text,
+                          addSubBrain.choiceA_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            sameAddBrain
-                                .checkAnswer(sameAddBrain.choiceA_value);
+                            addSubBrain.checkAnswer(addSubBrain.choiceA_value);
                           });
                         },
                       ),
@@ -67,13 +68,12 @@ class _SameAddScreenState extends State<SameAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          sameAddBrain.choiceB_text,
+                          addSubBrain.choiceB_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            sameAddBrain
-                                .checkAnswer(sameAddBrain.choiceB_value);
+                            addSubBrain.checkAnswer(addSubBrain.choiceB_value);
                           });
                         },
                       ),
@@ -89,13 +89,12 @@ class _SameAddScreenState extends State<SameAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          sameAddBrain.choiceC_text,
+                          addSubBrain.choiceC_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            sameAddBrain
-                                .checkAnswer(sameAddBrain.choiceC_value);
+                            addSubBrain.checkAnswer(addSubBrain.choiceC_value);
                           });
                         },
                       ),
@@ -107,13 +106,12 @@ class _SameAddScreenState extends State<SameAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          sameAddBrain.choiceD_text,
+                          addSubBrain.choiceD_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            sameAddBrain
-                                .checkAnswer(sameAddBrain.choiceD_value);
+                            addSubBrain.checkAnswer(addSubBrain.choiceD_value);
                           });
                         },
                       ),
