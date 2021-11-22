@@ -1,4 +1,5 @@
 import 'package:calculation_game/widget/circledsign.dart';
+import 'package:calculation_game/widget/fraction_reduced_widget.dart';
 import 'package:calculation_game/widget/fractionwidget.dart';
 
 import 'package:flutter/material.dart';

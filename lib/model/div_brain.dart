@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:calculation_game/widget/fraction_reduced_widget.dart';
 import 'package:calculation_game/widget/fractionwidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fraction/fraction.dart';
@@ -51,17 +52,17 @@ class DivBrain {
       mainAxisAlignment: MainAxisAlignment.center,
       children: !frac_y.isNegative
           ? [
-              FractionWidget(frac_x.numerator, frac_x.denominator),
+              FractionReducedWidget(frac_x.numerator, frac_x.denominator),
               Text(
                 '÷',
                 style: TextStyle(
                   fontSize: 40.0,
                 ),
               ),
-              FractionWidget(frac_y.numerator, frac_y.denominator)
+              FractionReducedWidget(frac_y.numerator, frac_y.denominator)
             ]
           : [
-              FractionWidget(frac_x.numerator, frac_x.denominator),
+              FractionReducedWidget(frac_x.numerator, frac_x.denominator),
               Text(
                 '÷',
                 style: TextStyle(
@@ -74,7 +75,7 @@ class DivBrain {
                   fontSize: 40.0,
                 ),
               ),
-              FractionWidget(frac_y.numerator, frac_y.denominator),
+              FractionReducedWidget(frac_y.numerator, frac_y.denominator),
               Text(
                 ')',
                 style: TextStyle(

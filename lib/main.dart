@@ -57,6 +57,7 @@ class _CalculationGameState extends State<CalculationGame> {
               ],
             ),
             bottomNavigationBar: TabBar(
+                // indicatorColor: Colors.deepPurpleAccent,
                 onTap: (index) {
                   {
                     setState(() {

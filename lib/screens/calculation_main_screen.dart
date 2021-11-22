@@ -1,5 +1,6 @@
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/screens/main_calculation_screens/main_div_screen.dart';
+import 'package:calculation_game/screens/main_calculation_screens/main_mix_screen.dart';
 import 'package:calculation_game/screens/main_calculation_screens/main_mul_screen.dart';
 import 'package:calculation_game/screens/main_calculation_screens/main_add_screen.dart';
 import 'package:calculation_game/screens/main_calculation_screens/main_addsub_screen.dart';
@@ -104,12 +105,23 @@ class _CalculationMainScreenState extends State<CalculationMainScreen> {
             ],
             moveScreen: MainDivScreen(),
           ),
-          ElevatedButton(
-            style: modeSelectButtonStyle,
-            child: Text('혼합 계산'),
-            onPressed: () {
-              setState(() {});
-            },
+          MainSelectbutton(
+            list: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.divide,
+                    size: 30.0,
+                  ),
+                ],
+              ),
+              Text(
+                '혼합 계산',
+                style: TextStyle(fontSize: 30.0),
+              ),
+            ],
+            moveScreen: MainMixScreen(),
           ),
         ],
       ),

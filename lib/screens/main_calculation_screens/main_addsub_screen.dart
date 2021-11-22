@@ -24,7 +24,7 @@ class _MainAddSubScreenState extends State<MainAddSubScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             modeSelectbutton(
-              text: '괄호와 양의 부호 \n생략 튜토리얼',
+              text: '괄호와 양의 부호 생략\n튜토리얼',
               moveScreen: AddSubTutorialScreen(),
             ),
             modeSelectbutton(

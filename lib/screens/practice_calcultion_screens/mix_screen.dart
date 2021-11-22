@@ -1,26 +1,29 @@
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/addsub_brain.dart';
 import 'package:calculation_game/model/div_brain.dart';
+import 'package:calculation_game/model/generalterm_brain.dart';
+import 'package:calculation_game/model/mix_brain.dart';
 import 'package:calculation_game/model/mul_two_brain.dart';
 import 'package:calculation_game/widget/fraction_reduced_widget.dart';
 import 'package:calculation_game/widget/fractionwidget.dart';
 
 import 'package:flutter/material.dart';
 
-class DivScreen extends StatefulWidget {
+class MixScreen extends StatefulWidget {
   @override
-  _DivScreenState createState() => _DivScreenState();
+  _MixScreenState createState() => _MixScreenState();
 }
 
-class _DivScreenState extends State<DivScreen> {
-  DivBrain divBrain = DivBrain();
+class _MixScreenState extends State<MixScreen> {
+  MixBrain mixBrain = MixBrain();
+  GeneralTermBrain generalTermBrain = GeneralTermBrain();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    divBrain.resetNumber();
+    mixBrain.resetNumber();
   }
 
   @override
@@ -31,12 +34,12 @@ class _DivScreenState extends State<DivScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '맞춘 개수: ' + divBrain.correctCount.toString(),
+            '맞춘 개수: ' + mixBrain.correctCount.toString(),
             style: TextStyle(
               fontSize: 50.0,
             ),
           ),
-          divBrain.questionRow,
+          mixBrain.questionRow,
           Column(
             children: [
               Row(
@@ -47,15 +50,15 @@ class _DivScreenState extends State<DivScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: FractionReducedWidget(
-                          divBrain.choiceA_value.numerator,
-                          divBrain.choiceA_value.denominator,
+                          mixBrain.choiceA_value.numerator,
+                          mixBrain.choiceA_value.denominator,
                           dividerColor: Colors.black,
                           dividerWidth: 30.0,
                           textStyle: TextStyle(fontSize: 30.0),
                         ),
                         onPressed: () {
                           setState(() {
-                            divBrain.checkAnswer(divBrain.choiceA_value);
+                            mixBrain.checkAnswer(mixBrain.choiceA_value);
                           });
                         },
                       ),
@@ -67,15 +70,15 @@ class _DivScreenState extends State<DivScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: FractionReducedWidget(
-                          divBrain.choiceB_value.numerator,
-                          divBrain.choiceB_value.denominator,
+                          mixBrain.choiceB_value.numerator,
+                          mixBrain.choiceB_value.denominator,
                           dividerColor: Colors.black,
                           dividerWidth: 30.0,
                           textStyle: TextStyle(fontSize: 30.0),
                         ),
                         onPressed: () {
                           setState(() {
-                            divBrain.checkAnswer(divBrain.choiceB_value);
+                            mixBrain.checkAnswer(mixBrain.choiceB_value);
                           });
                         },
                       ),
@@ -91,15 +94,15 @@ class _DivScreenState extends State<DivScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: FractionReducedWidget(
-                          divBrain.choiceC_value.numerator,
-                          divBrain.choiceC_value.denominator,
+                          mixBrain.choiceC_value.numerator,
+                          mixBrain.choiceC_value.denominator,
                           dividerColor: Colors.black,
                           dividerWidth: 30.0,
                           textStyle: TextStyle(fontSize: 30.0),
                         ),
                         onPressed: () {
                           setState(() {
-                            divBrain.checkAnswer(divBrain.choiceC_value);
+                            mixBrain.checkAnswer(mixBrain.choiceC_value);
                           });
                         },
                       ),
@@ -111,15 +114,15 @@ class _DivScreenState extends State<DivScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: FractionReducedWidget(
-                          divBrain.choiceD_value.numerator,
-                          divBrain.choiceD_value.denominator,
+                          mixBrain.choiceD_value.numerator,
+                          mixBrain.choiceD_value.denominator,
                           dividerColor: Colors.black,
                           dividerWidth: 30.0,
                           textStyle: TextStyle(fontSize: 30.0),
                         ),
                         onPressed: () {
                           setState(() {
-                            divBrain.checkAnswer(divBrain.choiceD_value);
+                            mixBrain.checkAnswer(mixBrain.choiceD_value);
                           });
                         },
                       ),
