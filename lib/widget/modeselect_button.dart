@@ -11,9 +11,14 @@ class modeSelectbutton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: modeSelectButtonStyle,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 30.0),
+      child: SizedBox(
+        height: 80.0,
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 30.0),
+          ),
+        ),
       ),
       onPressed: () {
         Navigator.push(

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 //여기가 주방. 계산은 여기서 처리하기.
-class CalculationBrain {
+class AddSubBrain {
   int x = 0;
   int y = 0;
   int realAnswer = 0;
@@ -23,13 +23,13 @@ class CalculationBrain {
 
     Set choiceSet = {};
 
-    x = Random().nextInt(200) - 100;
-    y = Random().nextInt(200) - 100;
+    x = Random().nextInt(20) - 10;
+    y = Random().nextInt(20) - 10;
 
     choiceSet.add(x + y);
 
     while (choiceSet.length < 4) {
-      choiceSet.add(x + y + Random().nextInt(20) - 10);
+      choiceSet.add(x + y + Random().nextInt(10) - 5);
     }
     choiceList = [...choiceSet];
     choiceList.shuffle();

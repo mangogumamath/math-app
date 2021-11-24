@@ -1,25 +1,22 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/calculation_brain.dart';
-import 'package:calculation_game/model/different_add_brain.dart';
+
+import 'package:calculation_game/model/same_add_brain.dart';
 import 'package:flutter/material.dart';
 
-class DifferentAddScreen extends StatefulWidget {
-  const DifferentAddScreen({Key? key}) : super(key: key);
-
+class SameAddScreen extends StatefulWidget {
   @override
-  _DifferentAddScreenState createState() => _DifferentAddScreenState();
+  _SameAddScreenState createState() => _SameAddScreenState();
 }
 
-class _DifferentAddScreenState extends State<DifferentAddScreen> {
-  DifferentAddBrain differentAddBrain = DifferentAddBrain();
-  TextEditingController _textEditingController = TextEditingController();
+class _SameAddScreenState extends State<SameAddScreen> {
+  SameAddBrain sameAddBrain = SameAddBrain();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    differentAddBrain.resetNumber();
+    sameAddBrain.resetNumber();
   }
 
   @override
@@ -30,13 +27,13 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '맞춘 개수: ' + differentAddBrain.correctCount.toString(),
+            '맞춘 개수: ' + sameAddBrain.correctCount.toString(),
             style: TextStyle(
               fontSize: 50.0,
             ),
           ),
           Text(
-            differentAddBrain.questionText,
+            sameAddBrain.questionText,
             style: TextStyle(
               fontSize: 50.0,
             ),
@@ -51,13 +48,13 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceA_text,
+                          sameAddBrain.choiceA_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceA_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceA_value);
                           });
                         },
                       ),
@@ -69,13 +66,13 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceB_text,
+                          sameAddBrain.choiceB_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceB_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceB_value);
                           });
                         },
                       ),
@@ -91,13 +88,13 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceC_text,
+                          sameAddBrain.choiceC_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceC_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceC_value);
                           });
                         },
                       ),
@@ -109,13 +106,13 @@ class _DifferentAddScreenState extends State<DifferentAddScreen> {
                       child: ElevatedButton(
                         style: calculationButtonStyle,
                         child: Text(
-                          differentAddBrain.choiceD_text,
+                          sameAddBrain.choiceD_text,
                           style: TextStyle(fontSize: 50),
                         ),
                         onPressed: () {
                           setState(() {
-                            differentAddBrain
-                                .checkAnswer(differentAddBrain.choiceD_value);
+                            sameAddBrain
+                                .checkAnswer(sameAddBrain.choiceD_value);
                           });
                         },
                       ),

@@ -1,4 +1,4 @@
-import 'package:calculation_game/screens/calculation_screen.dart';
+import 'package:calculation_game/screens/calculation_main_screen.dart';
 import 'package:calculation_game/screens/home_screen.dart';
 import 'package:calculation_game/screens/my_screen.dart';
 import 'package:flutter/material.dart';
@@ -52,11 +52,12 @@ class _CalculationGameState extends State<CalculationGame> {
               index: _widgetIndex,
               children: [
                 // HomeScreen(),
-                CalculationScreen(),
+                CalculationMainScreen(),
                 MyScreen(),
               ],
             ),
             bottomNavigationBar: TabBar(
+                // indicatorColor: Colors.deepPurpleAccent,
                 onTap: (index) {
                   {
                     setState(() {
