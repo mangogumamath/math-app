@@ -22,9 +22,14 @@ class _CalculationMainScreenState extends State<CalculationMainScreen> {
         children: [
           MainSelectbutton(
             list: [
-              FaIcon(
-                FontAwesomeIcons.plus,
-                size: 30.0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.plus,
+                    size: 30.0,
+                  ),
+                ],
               ),
               Text(
                 '덧셈',
@@ -35,9 +40,14 @@ class _CalculationMainScreenState extends State<CalculationMainScreen> {
           ),
           MainSelectbutton(
             list: [
-              FaIcon(
-                FontAwesomeIcons.minus,
-                size: 30.0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.minus,
+                    size: 30.0,
+                  ),
+                ],
               ),
               Text(
                 '뺄셈',

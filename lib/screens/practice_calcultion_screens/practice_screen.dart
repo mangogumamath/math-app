@@ -5,6 +5,7 @@ import 'package:calculation_game/widget/choose_answer_button.dart';
 import 'package:calculation_game/widget/fraction_reduced_widget.dart';
 import 'package:calculation_game/widget/right_wrong_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PracticeScreen extends StatefulWidget {
   PracticeScreen({required this.calculationType});
@@ -17,7 +18,7 @@ class _PracticeScreenState extends State<PracticeScreen>
     with TickerProviderStateMixin {
   CalculationBrain calculationBrain =
       CalculationBrain(calculationType: CalculationType.sameAdd);
-  LevelBrain levelBrain = LevelBrain();
+  late LevelBrain levelBrain;
 
   bool rightAnswerBool = true;
 
@@ -36,14 +37,34 @@ class _PracticeScreenState extends State<PracticeScreen>
   Widget chooseButtonC = ChooseAnswerButton();
   Widget chooseButtonD = ChooseAnswerButton();
 
+  int _maxScore = 0;
+
+  Future<void> _setMaxScore() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _maxScore = calculationBrain.score;
+    prefs.setInt('maxScore', _maxScore);
+  }
+
+  Future<void> _getMaxScore() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _maxScore = (prefs.getInt('maxScore') ?? 0);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    //최고점수 읽어오기
+    _getMaxScore();
+
     //연산담당자 인스턴스 생성
     calculationBrain =
         CalculationBrain(calculationType: widget.calculationType);
-
+    //레벨담당자 인스턴스 생성
+    levelBrain = LevelBrain(calculationType: widget.calculationType);
+    //연산 종류에 따른 레벨 확인
+    levelBrain.levelUpCheck(
+        calculationBrain.score, calculationBrain.calculationType);
     //숫자 리셋
     calculationBrain.resetNumber();
 
@@ -65,10 +86,10 @@ class _PracticeScreenState extends State<PracticeScreen>
       }
     });
 
-    //시간 게이지 위젯 애니메이션 관리, 종료 대화창 관리
+    //시간 게이지 위젯 애니메이션 관리
     gaugeController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: Duration(seconds: levelBrain.quizTimeSecond),
     );
     gaugeController.forward();
 
@@ -78,8 +99,12 @@ class _PracticeScreenState extends State<PracticeScreen>
       setState(() {});
     });
     gaugeController.addStatusListener((status) {
-      //종료 대화창
+      //종료 대화창 관리
       if (status == AnimationStatus.completed) {
+        if (_maxScore < calculationBrain.score) {
+          _setMaxScore();
+        }
+
         isButtonDisabled = true;
         showDialog(
             barrierDismissible: false,
@@ -97,6 +122,13 @@ class _PracticeScreenState extends State<PracticeScreen>
                       Center(
                         child: Text(
                           calculationBrain.score.toString() + ' 점',
+                        ),
+                      ),
+                      Center(
+                        child: Text(
+                          '최고점수: ' + _maxScore.toString() + ' 점',
+                          style: TextStyle(
+                              fontSize: 30.0, fontFamily: 'ONEMobilePOP'),
                         ),
                       ),
                     ],
@@ -126,11 +158,15 @@ class _PracticeScreenState extends State<PracticeScreen>
 
   //위젯 컨트롤에 관여하므로 이 함수는 여기에 둔다.
   void showMark_goGauge_levelUpCheck_function(bool rightAnswerBool) {
-    levelBrain.levelUpCheck(calculationBrain.score);
+    //레벨 확인
+    levelBrain.levelUpCheck(
+        calculationBrain.score, calculationBrain.calculationType);
 
+    //맞고 틀림 애니메이션 실행
     animationController.reset();
     animationController.forward();
 
+    //정답을 누른 경우 게이지 레벨 갱신 및 게이지 리셋
     if (rightAnswerBool) {
       gaugeController.duration = Duration(seconds: levelBrain.quizTimeSecond);
       gaugeController.reset();
@@ -140,6 +176,7 @@ class _PracticeScreenState extends State<PracticeScreen>
 
   //위젯 컨트롤에 관여하므로 이 함수는 여기에 둔다.
   void chooseAnswerButton_function(dynamic submittedAnswer) {
+    //레벨 설정
     setState(() {
       calculationBrain.checkAnswer(
           submittedAnswer,

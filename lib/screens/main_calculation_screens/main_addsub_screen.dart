@@ -26,7 +26,7 @@ class _MainAddSubScreenState extends State<MainAddSubScreen> {
               moveScreen: AddSubTutorialScreen(),
             ),
             modeSelectbutton(
-              text: '덧셈과 뺄셈',
+              text: '괄호와 양의 부호가 생략된\n덧셈과 뺄셈',
               moveScreen:
                   PracticeScreen(calculationType: CalculationType.addSub),
             ),

@@ -1,17 +1,20 @@
+import 'package:calculation_game/constants.dart';
 import 'package:flutter/material.dart';
 
 class LevelBrain {
+  LevelBrain({required this.calculationType});
   int quizTimeSecond = 10;
   int scoreMul = 200;
   int minusScore = 100;
   String levelText = '1 Lv';
   Color levelTextColor = Colors.green;
+  CalculationType calculationType = CalculationType.sameAdd;
 
-  void levelUpCheck(score) {
+  void levelUpCheck(int score, CalculationType calculationType) {
     if (score < 500) {
       levelText = '1 Lv';
       levelTextColor = Colors.green;
-      quizTimeSecond = 10;
+      quizTimeSecond = 2;
       scoreMul = 200;
       minusScore = (0.5 * scoreMul).round();
     } else if (score < 1000) {
@@ -38,6 +41,15 @@ class LevelBrain {
       quizTimeSecond = 2;
       scoreMul = 1000;
       minusScore = (0.5 * scoreMul).round();
+    }
+    if (calculationType == CalculationType.multiplicationMany) {
+      quizTimeSecond = quizTimeSecond * 3;
+    }
+    if (calculationType == CalculationType.division) {
+      quizTimeSecond = quizTimeSecond * 3;
+    }
+    if (calculationType == CalculationType.mix) {
+      quizTimeSecond = quizTimeSecond * 10;
     }
   }
 }

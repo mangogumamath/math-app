@@ -529,8 +529,12 @@ class CalculationBrain {
       bool random_bool = Random().nextBool();
 
       realAnswer = random_bool
-          ? MathNodeExpression.fromString(calExpression1).calc(0).toFraction()
-          : MathNodeExpression.fromString(calExpression2).calc(0).toFraction();
+          ? MathNodeExpression.fromString(calExpression1)
+              .calc(MathVariableValues({'x': 0}))
+              .toFraction()
+          : MathNodeExpression.fromString(calExpression2)
+              .calc(MathVariableValues({'x': 0}))
+              .toFraction();
 
       if (realAnswer.numerator.abs() >= 100 ||
           realAnswer.denominator.abs() >= 100) {
