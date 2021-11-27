@@ -1,13 +1,7 @@
-import 'package:calculation_game/screens/practice_calcultion_screens/different_add_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/div_screen.dart';
+import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/screens/practice_calcultion_screens/mix_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/mul_many_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/mul_two_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/same_add_screen.dart';
-import 'package:calculation_game/screens/tutorial/addtutorial_screen.dart';
-import 'package:calculation_game/screens/tutorial/divtutorial_screen.dart';
+import 'package:calculation_game/screens/practice_calcultion_screens/practice_screen.dart';
 import 'package:calculation_game/screens/tutorial/mixtutorial_screen.dart';
-import 'package:calculation_game/screens/tutorial/multutorial_screen.dart';
 import 'package:calculation_game/widget/modeselect_button.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +28,9 @@ class _MainMixScreenState extends State<MainMixScreen> {
             ),
             modeSelectbutton(
               text: '혼합 계산',
-              moveScreen: MixScreen(),
+              moveScreen: PracticeScreen(
+                calculationType: CalculationType.mix,
+              ),
             ),
           ],
         ),

@@ -1,8 +1,7 @@
+import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/screens/practice_calcultion_screens/addsub_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/different_add_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/same_add_screen.dart';
+import 'package:calculation_game/screens/practice_calcultion_screens/practice_screen.dart';
 import 'package:calculation_game/screens/tutorial/addsubtutorial_screen.dart';
-import 'package:calculation_game/screens/tutorial/addtutorial_screen.dart';
 import 'package:calculation_game/widget/modeselect_button.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +28,8 @@ class _MainAddSubScreenState extends State<MainAddSubScreen> {
             ),
             modeSelectbutton(
               text: '덧셈과 뺄셈',
-              moveScreen: AddSubScreen(),
+              moveScreen:
+                  PracticeScreen(calculationType: CalculationType.addSub),
             ),
           ],
         ),

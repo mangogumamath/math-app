@@ -1,8 +1,7 @@
-import 'package:calculation_game/screens/practice_calcultion_screens/different_add_screen.dart';
+import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/screens/practice_calcultion_screens/mul_many_screen.dart';
 import 'package:calculation_game/screens/practice_calcultion_screens/mul_two_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/same_add_screen.dart';
-import 'package:calculation_game/screens/tutorial/addtutorial_screen.dart';
+import 'package:calculation_game/screens/practice_calcultion_screens/practice_screen.dart';
 import 'package:calculation_game/screens/tutorial/multutorial_screen.dart';
 import 'package:calculation_game/widget/modeselect_button.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +29,13 @@ class _MainMulScreenState extends State<MainMulScreen> {
             ),
             modeSelectbutton(
               text: '두 수의 곱셈',
-              moveScreen: MulTwoScreen(),
+              moveScreen: PracticeScreen(
+                  calculationType: CalculationType.multiplicationTwo),
             ),
             modeSelectbutton(
               text: '세 개 이상의 수의 곱셈',
-              moveScreen: MulManyScreen(),
+              moveScreen: PracticeScreen(
+                  calculationType: CalculationType.multiplicationMany),
             ),
           ],
         ),

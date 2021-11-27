@@ -6,6 +6,7 @@ class MulManyBrain {
   int y = 0;
   int z = 0;
   int w = 0;
+
   String str_x = '';
   String str_y = '';
   String str_z = '';

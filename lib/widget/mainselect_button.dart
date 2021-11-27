@@ -1,6 +1,5 @@
 import 'package:calculation_game/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainSelectbutton extends StatelessWidget {
   MainSelectbutton({required this.moveScreen, required this.list});

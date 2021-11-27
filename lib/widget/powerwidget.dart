@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fraction/fraction.dart';
 
 class PowerWidget extends StatelessWidget {
   PowerWidget({

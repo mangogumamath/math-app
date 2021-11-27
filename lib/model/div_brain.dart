@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:calculation_game/widget/fraction_reduced_widget.dart';
-import 'package:calculation_game/widget/fractionwidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fraction/fraction.dart';
 
@@ -13,12 +12,12 @@ class DivBrain {
   int d = 0;
   Fraction frac_x = Fraction(1, 1);
   Fraction frac_y = Fraction(1, 1);
-  Fraction realAnswer = Fraction(1);
+  var realAnswer = Fraction(1);
   Fraction choiceA_value = Fraction(1);
   Fraction choiceB_value = Fraction(1);
   Fraction choiceC_value = Fraction(1);
   Fraction choiceD_value = Fraction(1);
-  List<Fraction> choiceList = [];
+  List choiceList = [];
   String choiceA_text = 'A';
   String choiceB_text = 'B';
   String choiceC_text = 'C';

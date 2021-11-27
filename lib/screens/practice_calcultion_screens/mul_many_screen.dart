@@ -1,8 +1,5 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/addsub_brain.dart';
 import 'package:calculation_game/model/mul_many_brain.dart';
-import 'package:calculation_game/model/mul_two_brain.dart';
-
 import 'package:flutter/material.dart';
 
 class MulManyScreen extends StatefulWidget {

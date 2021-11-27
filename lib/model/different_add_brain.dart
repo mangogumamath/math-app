@@ -17,6 +17,7 @@ class DifferentAddBrain {
 
   bool checkBool = true;
   int correctCount = 0;
+  int score = 0;
 
   String questionText = '';
 
@@ -64,10 +65,18 @@ class DifferentAddBrain {
         : choiceD_value.toString();
   }
 
-  void checkAnswer(int submittedAnswer) {
+  void checkAnswer(int submittedAnswer, int plusScore, int minusScore) {
     realAnswer = x + y;
     checkBool = submittedAnswer == realAnswer ? true : false;
-    checkBool ? correctCount++ : {};
-    resetNumber();
+    if (checkBool) {
+      score += plusScore;
+      resetNumber();
+    } else {
+      if (score >= minusScore) {
+        score -= minusScore;
+      } else {
+        score = 0;
+      }
+    }
   }
 }

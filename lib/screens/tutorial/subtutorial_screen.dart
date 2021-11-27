@@ -1,7 +1,4 @@
-import 'package:calculation_game/constants.dart';
-
 import 'package:calculation_game/widget/circledsign.dart';
-
 import 'package:flutter/material.dart';
 
 class SubTutorialScreen extends StatefulWidget {

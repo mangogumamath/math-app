@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 
+enum CalculationType {
+  sameAdd,
+  diffAdd,
+  subtraction,
+  addSub,
+  multiplicationTwo,
+  multiplicationMany,
+  division,
+  mix
+}
+
 ButtonStyle mainSelectButtonStyle = ButtonStyle(
   // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(10.0)),
   fixedSize: MaterialStateProperty.all<Size>(Size(200.0, 80.0)),

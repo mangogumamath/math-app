@@ -1,12 +1,7 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/addsub_brain.dart';
-import 'package:calculation_game/model/div_brain.dart';
 import 'package:calculation_game/model/generalterm_brain.dart';
 import 'package:calculation_game/model/mix_brain.dart';
-import 'package:calculation_game/model/mul_two_brain.dart';
 import 'package:calculation_game/widget/fraction_reduced_widget.dart';
-import 'package:calculation_game/widget/fractionwidget.dart';
-
 import 'package:flutter/material.dart';
 
 class MixScreen extends StatefulWidget {

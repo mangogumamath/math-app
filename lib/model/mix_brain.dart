@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:calculation_game/model/generalterm_brain.dart';
-import 'package:calculation_game/widget/fraction_reduced_widget.dart';
-import 'package:calculation_game/widget/fractionwidget.dart';
 import 'package:calculation_game/widget/generalterm_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fraction/fraction.dart';
