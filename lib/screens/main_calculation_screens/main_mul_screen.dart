@@ -1,6 +1,4 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/mul_many_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/mul_two_screen.dart';
 import 'package:calculation_game/screens/practice_calcultion_screens/practice_screen.dart';
 import 'package:calculation_game/screens/tutorial/multutorial_screen.dart';
 import 'package:calculation_game/widget/modeselect_button.dart';

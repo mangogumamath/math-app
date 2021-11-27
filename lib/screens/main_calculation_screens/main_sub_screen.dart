@@ -1,6 +1,5 @@
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/screens/practice_calcultion_screens/practice_screen.dart';
-import 'package:calculation_game/screens/practice_calcultion_screens/sub_screen.dart';
 import 'package:calculation_game/screens/tutorial/subtutorial_screen.dart';
 import 'package:calculation_game/widget/modeselect_button.dart';
 import 'package:flutter/material.dart';
