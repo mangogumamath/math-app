@@ -1,5 +1,8 @@
+import 'package:calculation_game/constants.dart';
+import 'package:calculation_game/model/adMob.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyScreen extends StatefulWidget {
@@ -17,11 +20,14 @@ class _MyScreenState extends State<MyScreen> {
     });
   }
 
+  AdMob adMob = AdMob();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _loadScore();
+    adMob.myBanner.load();
   }
 
   Future<void> _removeScore() async {
@@ -34,9 +40,13 @@ class _MyScreenState extends State<MyScreen> {
     _loadScore();
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          adMob.adContainer,
+          SizedBox(
+            height: 120.0,
+          ),
           Text(
             '최고점수: \n' + _maxScore.toString() + ' 점',
             style: TextStyle(
@@ -44,6 +54,7 @@ class _MyScreenState extends State<MyScreen> {
               color: Colors.amber,
             ),
           ),
+
           //최고점수 삭제 버튼
           // ElevatedButton(
           //     onPressed: _removeScore, child: FaIcon(FontAwesomeIcons.eraser)),

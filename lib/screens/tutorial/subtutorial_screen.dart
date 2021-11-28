@@ -58,361 +58,369 @@ class _SubTutorialScreenState extends State<SubTutorialScreen>
         controller: tabController,
         children: [
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
-                      fontSize: 30.0,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 30.0,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '빼는 수의 부호',
+                          style: TextStyle(
+                            color: highlight4,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '를 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '바꾸어 더한다.',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '빼는 수의 부호',
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-5)-(+3)=?',
                         style: TextStyle(
-                          color: highlight4,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '를 ',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '바꾸어 더한다.',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-5)-(+3)=?',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color: highlight1.withOpacity(0.0),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight1.withOpacity(0.0),
-                    ),
-                    Text(
-                      '5',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '5',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight3,
-                    ),
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color: highlight3,
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '3',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '=(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '3',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight1.withOpacity(0.0),
-                    ),
-                    Text(
-                      '5',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '=(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight3,
-                    ),
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color: highlight1.withOpacity(0.0),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '3',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '5',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '=-8',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '+',
+                        color: highlight3,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-5)-(+3)=-8',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-              ],
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
+                      ),
+                      Text(
+                        '3',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '=-8',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-5)-(+3)=-8',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                ],
+              ),
             ),
           ),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
-                      fontSize: 30.0,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 30.0,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '빼는 수의 부호',
+                          style: TextStyle(
+                            color: highlight4,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '를 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '바꾸어 더한다.',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '빼는 수의 부호',
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-2)-(-5)=?',
                         style: TextStyle(
-                          color: highlight4,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '를 ',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '바꾸어 더한다.',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-2)-(-5)=?',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color: highlight1.withOpacity(0.0),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight1.withOpacity(0.0),
-                    ),
-                    Text(
-                      '2',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight3,
-                    ),
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color: highlight3,
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '5',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '=(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '5',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight1.withOpacity(0.0),
-                    ),
-                    Text(
-                      '2',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '=(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight3,
-                    ),
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color: highlight1.withOpacity(0.0),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '5',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '=+3',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '+',
+                        color: highlight3,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-2)-(-5)=+3',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-              ],
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
+                      ),
+                      Text(
+                        '5',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '=+3',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-2)-(-5)=+3',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

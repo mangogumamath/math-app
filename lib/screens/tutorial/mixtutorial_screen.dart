@@ -59,271 +59,275 @@ class _MixTutorialScreenState extends State<MixTutorialScreen>
         controller: tabController,
         children: [
           Center(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontFamily: fontFamily,
-                        fontSize: 30.0,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontFamily: fontFamily,
+                          fontSize: 30.0,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: '덧셈, 뺄셈, 곱셈, 나눗셈이 섞여 있는 식은 아래의 순서로 계산한다.\n',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '1. 거듭제곱을 먼저\n',
+                            style: TextStyle(
+                              color: highlight1,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '2. 괄호 안을 먼저\n',
+                            style: TextStyle(
+                              color: highlight2,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '3. 곱셈, 나눗셈을 순서대로\n',
+                            style: TextStyle(
+                              color: highlight3,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '4. 덧셈, 뺄셈을 순서대로',
+                            style: TextStyle(
+                              color: highlight4,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                        ],
                       ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '덧셈, 뺄셈, 곱셈, 나눗셈이 섞여 있는 식은 아래의 순서로 계산한다.\n',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '1. 거듭제곱을 먼저\n',
-                          style: TextStyle(
-                            color: highlight1,
-                            fontSize: 30.0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '2. 괄호 안을 먼저\n',
-                          style: TextStyle(
-                            color: highlight2,
-                            fontSize: 30.0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '3. 곱셈, 나눗셈을 순서대로\n',
-                          style: TextStyle(
-                            color: highlight3,
-                            fontSize: 30.0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '4. 덧셈, 뺄셈을 순서대로',
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FractionWidget(5, 4),
+                        Text(
+                          '-',
                           style: TextStyle(
                             color: highlight4,
-                            fontSize: 30.0,
+                            fontSize: 40.0,
                           ),
+                        ),
+                        Text(
+                          '(8-5)',
+                          style: TextStyle(
+                            color: highlight2,
+                            fontSize: 40.0,
+                          ),
+                        ),
+                        Text(
+                          '×',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 40.0,
+                          ),
+                        ),
+                        Text(
+                          '(',
+                          style: TextStyle(
+                            color: highlight1,
+                            fontSize: 40.0,
+                          ),
+                        ),
+                        FractionWidget(
+                          -1,
+                          2,
+                          textStyle: TextStyle(fontSize: 40, color: highlight1),
+                          dividerColor: highlight1,
+                        ),
+                        Text(
+                          ')',
+                          style: TextStyle(
+                            color: highlight1,
+                            fontSize: 40.0,
+                          ),
+                        ),
+                        PowerWidget(
+                          textStyle: TextStyle(fontSize: 30, color: highlight1),
+                          power: 2,
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FractionWidget(5, 4),
-                      Text(
-                        '-',
-                        style: TextStyle(
-                          color: highlight4,
-                          fontSize: 40.0,
-                        ),
-                      ),
-                      Text(
-                        '(8-5)',
-                        style: TextStyle(
-                          color: highlight2,
-                          fontSize: 40.0,
-                        ),
-                      ),
-                      Text(
-                        '×',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 40.0,
-                        ),
-                      ),
-                      Text(
-                        '(',
-                        style: TextStyle(
-                          color: highlight1,
-                          fontSize: 40.0,
-                        ),
-                      ),
-                      FractionWidget(
-                        -1,
-                        2,
-                        textStyle: TextStyle(fontSize: 40, color: highlight1),
-                        dividerColor: highlight1,
-                      ),
-                      Text(
-                        ')',
-                        style: TextStyle(
-                          color: highlight1,
-                          fontSize: 40.0,
-                        ),
-                      ),
-                      PowerWidget(
-                        textStyle: TextStyle(fontSize: 30, color: highlight1),
-                        power: 2,
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           Center(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    children: [
-                      FractionWidget(5, 4),
-                      Text(
-                        '-',
-                        style: TextStyle(
-                          color: highlight4,
-                          fontSize: 40.0,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      children: [
+                        FractionWidget(5, 4),
+                        Text(
+                          '-',
+                          style: TextStyle(
+                            color: highlight4,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '(8-5)',
-                        style: TextStyle(
-                          color: highlight2,
-                          fontSize: 40.0,
+                        Text(
+                          '(8-5)',
+                          style: TextStyle(
+                            color: highlight2,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '×',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 40.0,
+                        Text(
+                          '×',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '(',
-                        style: TextStyle(
-                          color: highlight1,
-                          fontSize: 40.0,
+                        Text(
+                          '(',
+                          style: TextStyle(
+                            color: highlight1,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(
-                        -1,
-                        2,
-                        textStyle: TextStyle(fontSize: 40, color: highlight1),
-                        dividerColor: highlight1,
-                      ),
-                      Text(
-                        ')',
-                        style: TextStyle(
-                          color: highlight1,
-                          fontSize: 40.0,
+                        FractionWidget(
+                          -1,
+                          2,
+                          textStyle: TextStyle(fontSize: 40, color: highlight1),
+                          dividerColor: highlight1,
                         ),
-                      ),
-                      PowerWidget(
-                        textStyle: TextStyle(fontSize: 30, color: highlight1),
-                        power: 2,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '=',
-                        style: TextStyle(
-                          fontSize: 40.0,
+                        Text(
+                          ')',
+                          style: TextStyle(
+                            color: highlight1,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(5, 4),
-                      Text(
-                        '-',
-                        style: TextStyle(
-                          color: highlight4,
-                          fontSize: 40.0,
+                        PowerWidget(
+                          textStyle: TextStyle(fontSize: 30, color: highlight1),
+                          power: 2,
                         ),
-                      ),
-                      Text(
-                        '(8-5)',
-                        style: TextStyle(
-                          color: highlight2,
-                          fontSize: 40.0,
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '=',
+                          style: TextStyle(
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '×',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 40.0,
+                        FractionWidget(5, 4),
+                        Text(
+                          '-',
+                          style: TextStyle(
+                            color: highlight4,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(
-                        1,
-                        4,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '=',
-                        style: TextStyle(
-                          fontSize: 40.0,
+                        Text(
+                          '(8-5)',
+                          style: TextStyle(
+                            color: highlight2,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(5, 4),
-                      Text(
-                        '-',
-                        style: TextStyle(
-                          color: highlight4,
-                          fontSize: 40.0,
+                        Text(
+                          '×',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '3',
-                        style: TextStyle(
-                          fontSize: 40.0,
+                        FractionWidget(
+                          1,
+                          4,
                         ),
-                      ),
-                      Text(
-                        '×',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 40.0,
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '=',
+                          style: TextStyle(
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(
-                        1,
-                        4,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '=',
-                        style: TextStyle(
-                          fontSize: 40.0,
+                        FractionWidget(5, 4),
+                        Text(
+                          '-',
+                          style: TextStyle(
+                            color: highlight4,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(5, 4),
-                      Text(
-                        '-',
-                        style: TextStyle(
-                          color: highlight4,
-                          fontSize: 40.0,
+                        Text(
+                          '3',
+                          style: TextStyle(
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(
-                        3,
-                        4,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '=',
-                        style: TextStyle(
-                          fontSize: 40.0,
+                        Text(
+                          '×',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 40.0,
+                          ),
                         ),
-                      ),
-                      FractionWidget(1, 2),
-                    ],
-                  ),
-                ],
+                        FractionWidget(
+                          1,
+                          4,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '=',
+                          style: TextStyle(
+                            fontSize: 40.0,
+                          ),
+                        ),
+                        FractionWidget(5, 4),
+                        Text(
+                          '-',
+                          style: TextStyle(
+                            color: highlight4,
+                            fontSize: 40.0,
+                          ),
+                        ),
+                        FractionWidget(
+                          3,
+                          4,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '=',
+                          style: TextStyle(
+                            fontSize: 40.0,
+                          ),
+                        ),
+                        FractionWidget(1, 2),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

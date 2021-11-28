@@ -59,902 +59,924 @@ class _DivTutorialScreenState extends State<DivTutorialScreen>
         controller: tabController,
         children: [
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
-                      fontSize: 30.0,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 30.0,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '부호가 같은 두 수의 나눗셈은 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '두 수의 절댓값의 나눗셈의 값',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '에 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '양의 부호',
+                          style: TextStyle(
+                            color: highlight1,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '를 붙인다.',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '부호가 같은 두 수의 나눗셈은 ',
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(+6)÷(+3)=?',
                         style: TextStyle(
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '두 수의 절댓값의 나눗셈의 값',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '에 ',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '양의 부호',
-                        style: TextStyle(
-                          color: highlight1,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '를 붙인다.',
-                        style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(+6)÷(+3)=?',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '6',
-                      style: TextStyle(fontSize: 40.0, color: highlight3),
-                    ),
-                    Text(
-                      ')÷(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '6',
+                        style: TextStyle(fontSize: 40.0, color: highlight3),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '3',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                        color: highlight3,
+                      Text(
+                        ')÷(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')=(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '6÷3',
-                      style: TextStyle(
-                        color: highlight3,
-                        fontSize: 40.0,
+                      Text(
+                        '3',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: highlight3,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')=(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(+6)÷(+3)=+2',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-4)÷(-2)=?',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '6÷3',
+                        style: TextStyle(
+                          color: highlight3,
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '4',
-                      style: TextStyle(fontSize: 40.0, color: highlight3),
-                    ),
-                    Text(
-                      ')÷(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(+6)÷(+3)=+2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '2',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                        color: highlight3,
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-4)÷(-2)=?',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')=(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '4÷2',
-                      style: TextStyle(
-                        color: highlight3,
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '4',
+                        style: TextStyle(fontSize: 40.0, color: highlight3),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-4)÷(-2)=+2',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')÷(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
+                      ),
+                      Text(
+                        '2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: highlight3,
+                        ),
+                      ),
+                      Text(
+                        ')=(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
+                      ),
+                      Text(
+                        '4÷2',
+                        style: TextStyle(
+                          color: highlight3,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-4)÷(-2)=+2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
-                      fontSize: 30.0,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 30.0,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '부호가 다른 두 수의 나눗셈은 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '두 수의 절댓값의 나눗셈의 값',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '에 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '음의 부호',
+                          style: TextStyle(
+                            color: highlight2,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '를 붙인다.',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '부호가 다른 두 수의 나눗셈은 ',
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(+6)÷(-3)=?',
                         style: TextStyle(
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '두 수의 절댓값의 나눗셈의 값',
-                        style: TextStyle(
-                          color: highlight3,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '에 ',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '음의 부호',
-                        style: TextStyle(
-                          color: highlight2,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '를 붙인다.',
-                        style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(+6)÷(-3)=?',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '6',
-                      style: TextStyle(fontSize: 40.0, color: highlight3),
-                    ),
-                    Text(
-                      ')÷(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '6',
+                        style: TextStyle(fontSize: 40.0, color: highlight3),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '3',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                        color: highlight3,
+                      Text(
+                        ')÷(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')=(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '6÷2',
-                      style: TextStyle(
-                        color: highlight3,
-                        fontSize: 40.0,
+                      Text(
+                        '3',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: highlight3,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')=(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(+6)÷(-3)=-2',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-4)÷(+2)=?',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '6÷2',
+                        style: TextStyle(
+                          color: highlight3,
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '4',
-                      style: TextStyle(fontSize: 40.0, color: highlight3),
-                    ),
-                    Text(
-                      ')÷(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(+6)÷(-3)=-2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '+',
-                      color: highlight1.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '2',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                        color: highlight3,
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-4)÷(+2)=?',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ')=(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    CircledSign(
-                      text: '-',
-                      color: highlight2.withOpacity(animationController.value),
-                    ),
-                    Text(
-                      '4÷2',
-                      style: TextStyle(
-                        color: highlight3,
-                        fontSize: 40.0,
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
                       ),
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '4',
+                        style: TextStyle(fontSize: 40.0, color: highlight3),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(-4)÷(+2)=-2',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')÷(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      CircledSign(
+                        text: '+',
+                        color:
+                            highlight1.withOpacity(animationController.value),
+                      ),
+                      Text(
+                        '2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: highlight3,
+                        ),
+                      ),
+                      Text(
+                        ')=(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      CircledSign(
+                        text: '-',
+                        color:
+                            highlight2.withOpacity(animationController.value),
+                      ),
+                      Text(
+                        '4÷2',
+                        style: TextStyle(
+                          color: highlight3,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(-4)÷(+2)=-2',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
-                      fontSize: 30.0,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '어떤 두 수의 곱이 1이 될 때, 한 수를 다른 수의 ',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                        ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 30.0,
                       ),
-                      TextSpan(
-                        text: '역수',
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '어떤 두 수의 곱이 1이 될 때, 한 수를 다른 수의 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '역수',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '라고 한다.',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '2',
                         style: TextStyle(
                           color: highlight3,
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
-                      TextSpan(
-                        text: '라고 한다.',
+                      Text(
+                        '×',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      FractionWidget(
+                        1,
+                        2,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
+                      ),
+                      Text(
+                        '=1',
+                        style: TextStyle(
+                          fontSize: 40.0,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '2',
-                      style: TextStyle(
-                        color: highlight3,
-                        fontSize: 40.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '2',
+                        style: TextStyle(
+                          color: highlight3,
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '×',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '의 역수는 ',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      1,
-                      2,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      '=1',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        1,
+                        2,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '2',
-                      style: TextStyle(
-                        color: highlight3,
-                        fontSize: 40.0,
+                      Text(
+                        '이다.',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '의 역수는 ',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FractionWidget(
+                        1,
+                        2,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
                       ),
-                    ),
-                    FractionWidget(
-                      1,
-                      2,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      '이다.',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '의 역수는 ',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FractionWidget(
-                      1,
-                      2,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      '의 역수는 ',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '2',
+                        style: TextStyle(
+                          color: highlight3,
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '2',
-                      style: TextStyle(
-                        color: highlight3,
-                        fontSize: 40.0,
+                      Text(
+                        '이다.',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '이다.',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
-                      fontSize: 30.0,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 30.0,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '어떤 두 수의 곱이 1이 될 때, 한 수를 다른 수의 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '역수',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '라고 한다.',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '어떤 두 수의 곱이 1이 될 때, 한 수를 다른 수의 ',
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
-                      TextSpan(
-                        text: '역수',
+                      FractionWidget(
+                        -4,
+                        5,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
+                      ),
+                      Text(
+                        ')',
                         style: TextStyle(
-                          color: highlight3,
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
-                      TextSpan(
-                        text: '라고 한다.',
+                      Text(
+                        '×',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      FractionWidget(
+                        -5,
+                        4,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
+                      ),
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      Text(
+                        '=1',
+                        style: TextStyle(
+                          fontSize: 40.0,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      -4,
-                      5,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        -4,
+                        5,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
                       ),
-                    ),
-                    Text(
-                      '×',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '의 역수는 ',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      -5,
-                      4,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '=1',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        -5,
+                        4,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      -4,
-                      5,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '이다.',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '의 역수는 ',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        -5,
+                        4,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
                       ),
-                    ),
-                    FractionWidget(
-                      -5,
-                      4,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '이다.',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '의 역수는 ',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      -5,
-                      4,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        -4,
+                        5,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
                       ),
-                    ),
-                    Text(
-                      '의 역수는 ',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '이다.',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      -4,
-                      5,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                      ),
-                    ),
-                    Text(
-                      '이다.',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
-                      fontSize: 30.0,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 30.0,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '나눗셈은 ',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '역수',
+                          style: TextStyle(
+                            color: highlight3,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '를 이용하여 나눗셈을 곱셈으로 바꾸어 계산할 수 있다.',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '나눗셈은 ',
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
-                      TextSpan(
-                        text: '역수',
+                      FractionWidget(
+                        -3,
+                        2,
+                      ),
+                      Text(
+                        ')',
                         style: TextStyle(
-                          color: highlight3,
-                          fontSize: 30.0,
+                          fontSize: 40.0,
                         ),
                       ),
-                      TextSpan(
-                        text: '를 이용하여 나눗셈을 곱셈으로 바꾸어 계산할 수 있다.',
+                      Text(
+                        '÷',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      FractionWidget(
+                        -9,
+                        4,
+                      ),
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '=(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      -3,
-                      2,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        -3,
+                        2,
                       ),
-                    ),
-                    Text(
-                      '÷',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '×',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: highlight3,
+                        ),
                       ),
-                    ),
-                    FractionWidget(
-                      -9,
-                      4,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        '(',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '=(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        -4,
+                        9,
+                        textStyle: TextStyle(color: highlight3, fontSize: 40.0),
+                        dividerColor: highlight3,
                       ),
-                    ),
-                    FractionWidget(
-                      -3,
-                      2,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      Text(
+                        ')',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '×',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                        color: highlight3,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '=',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '(',
-                      style: TextStyle(
-                        fontSize: 40.0,
+                      FractionWidget(
+                        2,
+                        3,
                       ),
-                    ),
-                    FractionWidget(
-                      -4,
-                      9,
-                      textStyle: TextStyle(color: highlight3, fontSize: 40.0),
-                      dividerColor: highlight3,
-                    ),
-                    Text(
-                      ')',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '=',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                      ),
-                    ),
-                    FractionWidget(
-                      2,
-                      3,
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

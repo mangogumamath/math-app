@@ -14,7 +14,7 @@ class LevelBrain {
     if (score < 500) {
       levelText = '1 Lv';
       levelTextColor = Colors.green;
-      quizTimeSecond = 2;
+      quizTimeSecond = 10;
       scoreMul = 200;
       minusScore = (0.5 * scoreMul).round();
     } else if (score < 1000) {

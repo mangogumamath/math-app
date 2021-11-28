@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/calculation_brain.dart';
 import 'package:calculation_game/model/level_brain.dart';
+import 'package:calculation_game/model/adMob.dart';
 import 'package:calculation_game/widget/choose_answer_button.dart';
 import 'package:calculation_game/widget/fraction_reduced_widget.dart';
 import 'package:calculation_game/widget/right_wrong_widget.dart';
@@ -19,6 +22,7 @@ class _PracticeScreenState extends State<PracticeScreen>
   CalculationBrain calculationBrain =
       CalculationBrain(calculationType: CalculationType.sameAdd);
   late LevelBrain levelBrain;
+  late AdMob adMob;
 
   bool rightAnswerBool = true;
 
@@ -54,6 +58,10 @@ class _PracticeScreenState extends State<PracticeScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
+    //광고담당자 읽어오기
+    adMob = AdMob();
+    adMob.myBanner.load();
+
     //최고점수 읽어오기
     _getMaxScore();
 
@@ -110,6 +118,9 @@ class _PracticeScreenState extends State<PracticeScreen>
             barrierDismissible: false,
             context: context,
             builder: (context) {
+              if (Random().nextInt(10) + 1 <= 3) {
+                adMob.showInterstitialAd();
+              }
               return AlertDialog(
                 title: Text('결과'),
                 titleTextStyle:
@@ -119,6 +130,10 @@ class _PracticeScreenState extends State<PracticeScreen>
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: [
+                      adMob.adContainer,
+                      SizedBox(
+                        height: 30.0,
+                      ),
                       Center(
                         child: Text(
                           calculationBrain.score.toString() + ' 점',
