@@ -1,5 +1,4 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/adMob.dart';
 import 'package:flutter/material.dart';
 
 class MainSelectbutton extends StatelessWidget {
@@ -11,7 +10,7 @@ class MainSelectbutton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: mainSelectButtonStyle,
+      // style: mainSelectButtonStyle,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: list,

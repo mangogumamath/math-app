@@ -1,19 +1,23 @@
-import 'package:calculation_game/constants.dart';
+import 'package:calculation_game/model/admob.dart';
+import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/calculation_main_screen.dart';
 import 'package:calculation_game/screens/my_screen.dart';
-import 'package:calculation_game/model/adMob.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  runApp(CalculationGame());
+  await Firebase.initializeApp();
+  runApp(const CalculationGame());
 }
 
 class CalculationGame extends StatefulWidget {
+  const CalculationGame({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   State<CalculationGame> createState() => _CalculationGameState();
@@ -35,72 +39,98 @@ class _CalculationGameState extends State<CalculationGame> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: '무한의 계산',
-      theme: ThemeData.dark().copyWith(
-        textTheme: TextTheme(
-          headline1: TextStyle(fontFamily: fontFamily),
-          subtitle1: TextStyle(fontFamily: fontFamily),
-          bodyText1: TextStyle(fontFamily: fontFamily),
-          bodyText2: TextStyle(fontFamily: fontFamily),
-          subtitle2: TextStyle(fontFamily: fontFamily),
-          button: TextStyle(fontFamily: fontFamily),
-          headline2: TextStyle(fontFamily: fontFamily),
-          caption: TextStyle(fontFamily: fontFamily),
-          overline: TextStyle(fontFamily: fontFamily),
-          headline3: TextStyle(fontFamily: fontFamily),
-          headline4: TextStyle(fontFamily: fontFamily),
-          headline5: TextStyle(fontFamily: fontFamily),
-          headline6: TextStyle(fontFamily: fontFamily),
+    return ChangeNotifierProvider<UserData>(
+      create: (_) {
+        return UserData();
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: '무한의 계산',
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xff121212),
+          fontFamily: 'ONEMobilePOP',
+          // brightness: Brightness.dark,
+          colorScheme: const ColorScheme.dark(
+            primary: Color(0xffbb86fc),
+            primaryVariant: Color(0xff3700B3),
+            secondary: Color(0xff03dac6),
+            secondaryVariant: Color(0xff03dac6),
+            surface: Color(0xff1E1E1E),
+            background: Color(0xff121212),
+            error: Color(0xffcf6679),
+            onPrimary: Colors.black,
+            onSecondary: Colors.black,
+            onSurface: Colors.white,
+            onBackground: Colors.white,
+            onError: Colors.black,
+            brightness: Brightness.dark,
+          ),
         ),
-        buttonTheme: ButtonThemeData(buttonColor: Color(0xFF03DAC5)),
-      ),
-      home: DefaultTabController(
-          length: 2,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text('무한의 계산'),
-            ),
+
+        //ThemeData.dark().copyWith(
+        //           textTheme: TextTheme(
+        //             headline1: TextStyle(fontFamily: fontFamily),
+        //             subtitle1: TextStyle(fontFamily: fontFamily),
+        //             bodyText1: TextStyle(fontFamily: fontFamily),
+        //             bodyText2: TextStyle(fontFamily: fontFamily),
+        //             subtitle2: TextStyle(fontFamily: fontFamily),
+        //             button: TextStyle(fontFamily: fontFamily),
+        //             headline2: TextStyle(fontFamily: fontFamily),
+        //             caption: TextStyle(fontFamily: fontFamily),
+        //             overline: TextStyle(fontFamily: fontFamily),
+        //             headline3: TextStyle(fontFamily: fontFamily),
+        //             headline4: TextStyle(fontFamily: fontFamily),
+        //             headline5: TextStyle(fontFamily: fontFamily),
+        //             headline6: TextStyle(fontFamily: fontFamily),
+        //           ),
+        //           // buttonTheme: ButtonThemeData(buttonColor: Color(0xFF03DAC5)),
+        //         ),
+        home: DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text('무한의 계산'),
+              ),
 // TabBarView
-            body: IndexedStack(
-              index: _widgetIndex,
-              children: [
+              body: IndexedStack(
+                index: _widgetIndex,
+                children: [
 // HomeScreen(),
-                CalculationMainScreen(),
-                MyScreen(),
-              ],
-            ),
-            bottomNavigationBar: Column(
-              mainAxisSize: MainAxisSize.min,
+                  CalculationMainScreen(),
+                  MyScreen(),
+                ],
+              ),
+              bottomNavigationBar: Column(
+                mainAxisSize: MainAxisSize.min,
 // mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TabBar(
+                children: [
+                  TabBar(
 // indicatorColor: Colors.deepPurpleAccent,
-                    onTap: (index) {
-                      {
-                        setState(() {
-                          _widgetIndex = index;
-                        });
-                      }
-                    },
-                    tabs: [
+                      onTap: (index) {
+                        {
+                          setState(() {
+                            _widgetIndex = index;
+                          });
+                        }
+                      },
+                      tabs: [
 // Tab(
 //   icon: Icon(Icons.home),
 //   // text: '홈',
 // ),
-                      Tab(
-                        icon: Icon(Icons.calculate_rounded),
+                        Tab(
+                          icon: Icon(Icons.calculate_rounded),
 // text: 'chat',
-                      ),
-                      Tab(
-                        icon: Icon(Icons.person),
+                        ),
+                        Tab(
+                          icon: Icon(Icons.person),
 // text: 'my',
-                      ),
-                    ]),
-              ],
-            ),
-          )),
+                        ),
+                      ]),
+                ],
+              ),
+            )),
+      ),
     );
   }
 }

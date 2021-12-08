@@ -1,14 +1,17 @@
 import 'dart:math';
 
 import 'package:calculation_game/constants.dart';
+import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/calculation_brain.dart';
 import 'package:calculation_game/model/level_brain.dart';
-import 'package:calculation_game/model/adMob.dart';
+import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/widget/choose_answer_button.dart';
 import 'package:calculation_game/widget/fraction_reduced_widget.dart';
 import 'package:calculation_game/widget/right_wrong_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class PracticeScreen extends StatefulWidget {
   PracticeScreen({required this.calculationType});
@@ -42,16 +45,41 @@ class _PracticeScreenState extends State<PracticeScreen>
   Widget chooseButtonD = ChooseAnswerButton();
 
   int _maxScore = 0;
+  String scoreKey = '';
+
+  final _fireStore = FirebaseFirestore.instance;
 
   Future<void> _setMaxScore() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
     _maxScore = calculationBrain.score;
-    prefs.setInt('maxScore', _maxScore);
+    Provider.of<UserData>(context, listen: false).userDataMap[scoreKey] =
+        calculationBrain.score;
+    // prefs.setInt('maxScore', _maxScore);
+    //합계 계산
+    Provider.of<UserData>(context, listen: false).checkUserHighScoreOfAll();
+
+    final uid =
+        Provider.of<UserData>(context, listen: false).userDataMap['uid'];
+
+    await _fireStore
+        .collection('UserData')
+        .doc(uid)
+        .set({
+          scoreKey: calculationBrain.score,
+          'userHighScoreOfAll': Provider.of<UserData>(context, listen: false)
+              .userDataMap['userHighScoreOfAll'],
+        }, SetOptions(merge: true))
+        .then((value) => print("Score merged with existing data!"))
+        .catchError((error) => print("Failed to merge data: $error"));
   }
 
-  Future<void> _getMaxScore() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _maxScore = (prefs.getInt('maxScore') ?? 0);
+  void _getMaxScore() {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // _maxScore = (prefs.getInt('maxScore') ?? 0);
+
+    _maxScore =
+        Provider.of<UserData>(context, listen: false).userDataMap[scoreKey] ??
+            0;
   }
 
   @override
@@ -61,6 +89,9 @@ class _PracticeScreenState extends State<PracticeScreen>
     //광고담당자 읽어오기
     adMob = AdMob();
     adMob.myBanner.load();
+
+    //현재 모드에 맞는 스코어 키 생성
+    scoreKey = describeEnum(widget.calculationType) + 'HighScore';
 
     //최고점수 읽어오기
     _getMaxScore();
@@ -119,7 +150,7 @@ class _PracticeScreenState extends State<PracticeScreen>
             context: context,
             builder: (context) {
               if (Random().nextInt(10) + 1 <= 3) {
-                adMob.showInterstitialAd();
+                // adMob.showInterstitialAd();
               }
               return AlertDialog(
                 title: Text('결과'),

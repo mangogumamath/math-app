@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:88696912140:android:f39be1f83c46cb199bf129",
+        "mobilesdk_app_id": "1:88696912140:android:bf9e9ca97f9deea69bf129",
         "android_client_info": {
-          "package_name": "com.mangogumamath.calculation_game"
+          "package_name": "com.mangogumamath.infinite_calculation"
         }
       },
       "oauth_client": [
         {
-          "client_id": "88696912140-vprpn3cvoh7fbtdm553gg4a55makli06.apps.googleusercontent.com",
+          "client_id": "88696912140-d1olu1fth5dkgvrp6unaspbf15qmbprg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.mangogumamath.calculation_game",
-            "certificate_hash": "8df437ee01b0180f206b1399311c8dfe887028fd"
+            "package_name": "com.mangogumamath.infinite_calculation",
+            "certificate_hash": "bd22d938465c62eadc5f8abe634b118ec26e6a93"
           }
         },
         {

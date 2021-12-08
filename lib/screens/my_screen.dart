@@ -1,8 +1,11 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/adMob.dart';
+import 'package:calculation_game/model/admob.dart';
+import 'package:calculation_game/model/user_data.dart';
+import 'package:calculation_game/screens/login_screen.dart';
+import 'package:calculation_game/screens/registration_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyScreen extends StatefulWidget {
@@ -11,22 +14,27 @@ class MyScreen extends StatefulWidget {
 }
 
 class _MyScreenState extends State<MyScreen> {
-  int _maxScore = 0;
+  String email = '';
+  Map<String, dynamic> _userDataMap = {};
+  int userRanking = 0;
 
-  void _loadScore() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _maxScore = (prefs.getInt('maxScore') ?? 0);
-    });
-  }
+  final _auth = FirebaseAuth.instance;
+
+  // void _loadScore() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _maxScore = (prefs.getInt('maxScore') ?? 0);
+  //   });
+  // }
 
   AdMob adMob = AdMob();
+
+  final scrollController = ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loadScore();
     adMob.myBanner.load();
   }
 
@@ -37,21 +45,146 @@ class _MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _loadScore();
+    _userDataMap = Provider.of<UserData>(context).userDataMap;
+    email = Provider.of<UserData>(context).userDataMap['email'];
+    userRanking = Provider.of<UserData>(context).userRanking;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           adMob.adContainer,
-          SizedBox(
-            height: 120.0,
-          ),
           Text(
-            '최고점수: \n' + _maxScore.toString() + ' 점',
-            style: TextStyle(
-              fontSize: 40.0,
+            email,
+            style: const TextStyle(
+              fontSize: 20.0,
               color: Colors.amber,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegistrationScreen()),
+                  );
+                },
+                child: Text('사용자 등록'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
+                child: Text('로그인'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _auth.signOut();
+                  // Provider.of<UserData>(context, listen: false)
+                  //     .signOutUserData();
+                },
+                child: Text('로그아웃'),
+              ),
+            ],
+          ),
+
+          Expanded(
+            child: Scrollbar(
+              controller: scrollController,
+              isAlwaysShown: true,
+              child: ListView(
+                controller: scrollController,
+                padding: const EdgeInsets.all(8.0),
+                children: ListTile.divideTiles(context: context, tiles: [
+                  ListTile(
+                    title: Text(
+                      '내 순위: ' + userRanking.toString() + ' 위',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '최고 점수 합계: ' +
+                          _userDataMap['userHighScoreOfAll'].toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '부호가 같은 덧셈: ' +
+                          _userDataMap['sameAddHighScore'].toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '부호가 다른 덧셈: ' +
+                          _userDataMap['diffAddHighScore'].toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '뺄셈: ' +
+                          _userDataMap['subtractionHighScore'].toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '덧셈과 뺄셈: ' +
+                          _userDataMap['addSubHighScore'].toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '두 수의 곱셈: ' +
+                          _userDataMap['multiplicationTwoHighScore']
+                              .toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '세 수 이상의 곱셈: ' +
+                          _userDataMap['multiplicationManyHighScore']
+                              .toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '나눗셈: ' +
+                          _userDataMap['divisionHighScore'].toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '혼합 계산: ' +
+                          _userDataMap['mixHighScore'].toString() +
+                          ' 점',
+                      style: kScoreTileTextStyle,
+                    ),
+                  ),
+                ]).toList(),
+              ),
             ),
           ),
 

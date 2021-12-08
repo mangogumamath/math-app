@@ -10,7 +10,7 @@ class modeSelectbutton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: modeSelectButtonStyle,
+      // style: modeSelectButtonStyle,
       child: SizedBox(
         height: 80.0,
         child: Center(
