@@ -3,8 +3,11 @@ import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/login_screen.dart';
 import 'package:calculation_game/screens/registration_screen.dart';
+import 'package:calculation_game/screens/userconfig_screen.dart';
+import 'package:calculation_game/widget/reusable_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,7 +17,7 @@ class MyScreen extends StatefulWidget {
 }
 
 class _MyScreenState extends State<MyScreen> {
-  String email = '';
+  String nickName = '';
   Map<String, dynamic> _userDataMap = {};
   int userRanking = 0;
 
@@ -46,7 +49,7 @@ class _MyScreenState extends State<MyScreen> {
   @override
   Widget build(BuildContext context) {
     _userDataMap = Provider.of<UserData>(context).userDataMap;
-    email = Provider.of<UserData>(context).userDataMap['email'];
+    nickName = Provider.of<UserData>(context).userDataMap['nickName'];
     userRanking = Provider.of<UserData>(context).userRanking;
 
     return Center(
@@ -54,45 +57,46 @@ class _MyScreenState extends State<MyScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          adMob.adContainer,
-          Text(
-            email,
-            style: const TextStyle(
-              fontSize: 20.0,
-              color: Colors.amber,
-            ),
+          const SizedBox(
+            height: 10.0,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RegistrationScreen()),
-                  );
-                },
-                child: Text('사용자 등록'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()),
-                  );
-                },
-                child: Text('로그인'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _auth.signOut();
-                  // Provider.of<UserData>(context, listen: false)
-                  //     .signOutUserData();
-                },
-                child: Text('로그아웃'),
-              ),
-            ],
+          adMob.adContainer,
+          const SizedBox(
+            height: 10.0,
+          ),
+          ReusableCard(
+            colour: const Color(0xff1E1E1E),
+            cardChild: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const FaIcon(
+                        FontAwesomeIcons.solidUserCircle,
+                        size: 30.0,
+                      ),
+                      Flexible(
+                        child: Text(
+                          ' ' + nickName,
+                          style: const TextStyle(fontSize: 25.0),
+                          // overflow: TextOverflow.clip,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const FaIcon(
+                  FontAwesomeIcons.chevronRight,
+                  size: 25.0,
+                ),
+              ],
+            ),
+            onPress: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UserConfigScreen()));
+            },
           ),
 
           Expanded(

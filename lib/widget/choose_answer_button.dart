@@ -8,11 +8,11 @@ class ChooseAnswerButton extends StatelessWidget {
       bool? isDisabled,
       double? fontsize,
       void Function()? onPressed}) {
-    this.buttonText = buttonText == null ? '' : buttonText;
-    this.buttonChild = buttonChild == null ? SizedBox() : buttonChild;
-    this.fontsize = fontsize == null ? 50.0 : fontsize;
-    this.onPressed = onPressed == null ? () {} : onPressed;
-    this.isDisabled = isDisabled == null ? false : isDisabled;
+    this.buttonText = buttonText ?? '';
+    this.buttonChild = buttonChild ?? SizedBox();
+    this.fontsize = fontsize ?? 50.0;
+    this.onPressed = onPressed ?? () {};
+    this.isDisabled = isDisabled ?? false;
   }
   bool isDisabled = false;
   String buttonText = '';

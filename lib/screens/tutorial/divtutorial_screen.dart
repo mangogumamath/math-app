@@ -386,7 +386,7 @@ class _DivTutorialScreenState extends State<DivTutorialScreen>
                             highlight2.withOpacity(animationController.value),
                       ),
                       Text(
-                        '6÷2',
+                        '6÷3',
                         style: TextStyle(
                           color: highlight3,
                           fontSize: 40.0,

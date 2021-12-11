@@ -1,46 +1,79 @@
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/widget/rounded_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String id = '/login_screen';
+class UserPasswordUpdateScreen extends StatefulWidget {
+  const UserPasswordUpdateScreen({Key? key}) : super(key: key);
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _UserPasswordUpdateScreenState createState() =>
+      _UserPasswordUpdateScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _UserPasswordUpdateScreenState extends State<UserPasswordUpdateScreen> {
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
+  final _store = FirebaseFirestore.instance;
   String email = '';
-  String password = '';
+  String oldPassword = '';
+  String newPassword = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('로그인'),
+        title: const Text('비밀번호 변경'),
         actions: [
           TextButton(
             child: Text(
-              '확인',
-              style: TextStyle(color: Color(0xffbb86fc), fontSize: 20.0),
+              '변경',
+              style: TextStyle(fontSize: 20.0),
             ),
             onPressed: () async {
+              if (newPassword.length < 6) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text(
+                      '6자리 이상의 비밀번호를 설정해주세요.',
+                      style: TextStyle(fontFamily: 'ONEMobilePOP'),
+                    ),
+                    action: SnackBarAction(label: '확인', onPressed: () {}),
+                  ),
+                );
+                return;
+              }
               setState(() {
                 showSpinner = true;
               });
               try {
-                final userCredential = await _auth.signInWithEmailAndPassword(
-                    email: email, password: password);
+                AuthCredential credential = EmailAuthProvider.credential(
+                    email: email, password: oldPassword);
+                final userCredential = await _auth.currentUser!
+                    .reauthenticateWithCredential(credential);
+
                 if (userCredential.user != null) {
-                  Provider.of<UserData>(context, listen: false)
-                      .signInUserData(userCredential.user!);
+                  try {
+                    await _auth.currentUser!.updatePassword(newPassword);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text(
+                          '비밀번호가 변경되었습니다.',
+                          style: TextStyle(fontFamily: 'ONEMobilePOP'),
+                        ),
+                        action: SnackBarAction(label: '확인', onPressed: () {}),
+                      ),
+                    );
+                  } on FirebaseAuthException catch (e) {
+                    print(e);
+                  }
                 }
 
                 setState(() {
@@ -90,10 +123,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     obscuringCharacter: '*',
                     textAlign: TextAlign.center,
                     onChanged: (value) {
-                      password = value;
+                      oldPassword = value;
                     },
                     decoration: kTextFieldDecoration.copyWith(
-                      hintText: '비밀번호',
+                      hintText: '현재 비밀번호',
                       icon: const FaIcon(
                         FontAwesomeIcons.key,
                         color: Colors.white,
@@ -101,33 +134,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     )),
                 SizedBox(
-                  height: 24.0,
+                  height: 30.0,
                 ),
-                // RoundedButton(
-                //   color: Color(0xffbb86fc),
-                //   buttonText: '로그인',
-                //   onPressed: () async {
-                //     setState(() {
-                //       showSpinner = true;
-                //     });
-                //     try {
-                //       final userCredential =
-                //           await _auth.signInWithEmailAndPassword(
-                //               email: email, password: password);
-                //       if (userCredential.user != null) {
-                //         Provider.of<UserData>(context, listen: false)
-                //             .signInUserData(userCredential.user!);
-                //       }
-                //
-                //       setState(() {
-                //         showSpinner = false;
-                //       });
-                //     } catch (e) {
-                //       print(e);
-                //     }
-                //     Navigator.pop(context);
-                //   },
-                // ),
+                TextField(
+                    style: kTextFieldTextStyle,
+                    obscureText: true,
+                    obscuringCharacter: '*',
+                    textAlign: TextAlign.center,
+                    onChanged: (value) {
+                      newPassword = value;
+                    },
+                    decoration: kTextFieldDecoration.copyWith(
+                      hintText: '새로운 비밀번호',
+                      icon: const FaIcon(
+                        FontAwesomeIcons.key,
+                        color: Colors.white,
+                        size: 25.0,
+                      ),
+                    )),
               ],
             ),
           ),

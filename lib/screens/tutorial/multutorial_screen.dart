@@ -385,7 +385,7 @@ class _MulTutorialScreenState extends State<MulTutorialScreen>
                             highlight2.withOpacity(animationController.value),
                       ),
                       Text(
-                        '3×2',
+                        '2×3',
                         style: TextStyle(
                           color: highlight3,
                           fontSize: 40.0,

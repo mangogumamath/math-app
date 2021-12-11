@@ -39,45 +39,44 @@ ButtonStyle calculationButtonStyle = ButtonStyle(
 
 //텍스트필드 textstyle
 TextStyle kTextFieldTextStyle =
-    const TextStyle(color: Colors.black, fontSize: 20.0);
-
-const kSendButtonTextStyle = TextStyle(
-  color: Colors.lightBlueAccent,
-  fontWeight: FontWeight.bold,
-  fontSize: 18.0,
-);
-
-const kMessageTextFieldDecoration = InputDecoration(
-  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-  hintText: 'Type your message here...',
-  border: InputBorder.none,
-);
-
-const kMessageContainerDecoration = BoxDecoration(
-  border: Border(
-    top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-  ),
-);
+    const TextStyle(color: Colors.white, fontSize: 20.0);
 
 const kTextFieldDecoration = InputDecoration(
   hintText: 'Enter your email',
   hintStyle: TextStyle(color: Colors.grey),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    borderRadius: BorderRadius.all(Radius.circular(10.0)),
   ),
-  enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-    borderRadius: BorderRadius.all(Radius.circular(32.0)),
-  ),
-  focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-    borderRadius: BorderRadius.all(Radius.circular(32.0)),
-  ),
+  // enabledBorder: OutlineInputBorder(
+  //   borderSide: BorderSide(color: Color(0xffbb86fc), width: 1.0),
+  //   borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  // ),
+  // focusedBorder: OutlineInputBorder(
+  //   borderSide: BorderSide(color: Color(0xffbb86fc), width: 2.0),
+  //   borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  // ),
 );
 
 const kScoreTileTextStyle = TextStyle(
   fontSize: 20.0,
 );
 
+// const kSendButtonTextStyle = TextStyle(
+//   color: Colors.lightBlueAccent,
+//   fontWeight: FontWeight.bold,
+//   fontSize: 18.0,
+// );
+//
+// const kMessageTextFieldDecoration = InputDecoration(
+//   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+//   hintText: 'Type your message here...',
+//   border: InputBorder.none,
+// );
+//
+// const kMessageContainerDecoration = BoxDecoration(
+//   border: Border(
+//     top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+//   ),
+// );
 //색상들

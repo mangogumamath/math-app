@@ -1,10 +1,12 @@
 import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/calculation_main_screen.dart';
+import 'package:calculation_game/screens/leaderboard_screen.dart';
 import 'package:calculation_game/screens/my_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
@@ -86,10 +88,10 @@ class _CalculationGameState extends State<CalculationGame> {
         //           // buttonTheme: ButtonThemeData(buttonColor: Color(0xFF03DAC5)),
         //         ),
         home: DefaultTabController(
-            length: 2,
+            length: 3,
             child: Scaffold(
               appBar: AppBar(
-                title: Text('무한의 계산'),
+                title: const Center(child: Text('무한의 계산')),
               ),
 // TabBarView
               body: IndexedStack(
@@ -97,6 +99,7 @@ class _CalculationGameState extends State<CalculationGame> {
                 children: [
 // HomeScreen(),
                   CalculationMainScreen(),
+                  LeaderBoardScreen(),
                   MyScreen(),
                 ],
               ),
@@ -113,17 +116,26 @@ class _CalculationGameState extends State<CalculationGame> {
                           });
                         }
                       },
-                      tabs: [
-// Tab(
-//   icon: Icon(Icons.home),
-//   // text: '홈',
-// ),
+                      tabs: const [
                         Tab(
-                          icon: Icon(Icons.calculate_rounded),
+                          icon: Icon(
+                            Icons.calculate_rounded,
+                            size: 30.0,
+                          ),
 // text: 'chat',
                         ),
                         Tab(
-                          icon: Icon(Icons.person),
+                          icon: FaIcon(
+                            FontAwesomeIcons.crown,
+                            size: 25.0,
+                          ),
+                          // text: '홈',
+                        ),
+                        Tab(
+                          icon: Icon(
+                            Icons.person,
+                            size: 30.0,
+                          ),
 // text: 'my',
                         ),
                       ]),

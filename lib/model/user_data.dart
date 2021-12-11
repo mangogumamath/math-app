@@ -16,12 +16,14 @@ class UserData with ChangeNotifier {
   }
   int userRanking = 0;
   List topRankerList = [];
+  bool isLogin = false;
 
   //사용자 데이터
   Map<String, dynamic> userDataMap = {
     'uid': '',
     'email': '',
-    'nickName': '',
+    'nickName': '로그인 하세요',
+    'registrationTimestamp': Timestamp(0, 0),
     'userHighScoreOfAll': 0,
     'sameAddHighScore': 0,
     'diffAddHighScore': 0,
@@ -33,24 +35,26 @@ class UserData with ChangeNotifier {
     'mixHighScore': 0
   };
   //Clear용 데이터. Clear(초기화)는 변수보다 구체적인 값으로 하는 것이 에러가 안난다.
-  Map<String, dynamic> userDataMapForClear = {
-    'uid': '',
-    'email': '',
-    'nickName': '',
-    'userHighScoreOfAll': 0,
-    'sameAddHighScore': 0,
-    'diffAddHighScore': 0,
-    'subtractionHighScore': 0,
-    'addSubHighScore': 0,
-    'multiplicationTwoHighScore': 0,
-    'multiplicationManyHighScore': 0,
-    'divisionHighScore': 0,
-    'mixHighScore': 0
-  };
+  // Map<String, dynamic> userDataMapForClear = {
+  //   'uid': '',
+  //   'email': '',
+  //   'nickName': '',
+  //   'userHighScoreOfAll': 0,
+  //   'sameAddHighScore': 0,
+  //   'diffAddHighScore': 0,
+  //   'subtractionHighScore': 0,
+  //   'addSubHighScore': 0,
+  //   'multiplicationTwoHighScore': 0,
+  //   'multiplicationManyHighScore': 0,
+  //   'divisionHighScore': 0,
+  //   'mixHighScore': 0
+  // };
 
   Future<void> signInUserData(User user) async {
     // userDataMap = userDataMapForClear;
     userRanking = 0;
+    isLogin = true;
+
     //uid 받기
     final uid = user.uid;
     //UserData를 Firestore에서 받아와서 userDataMap을 update하기
@@ -82,7 +86,8 @@ class UserData with ChangeNotifier {
     userDataMap = {
       'uid': '',
       'email': '',
-      'nickName': '',
+      'nickName': ' 로그인 하세요',
+      'registrationTimestamp': Timestamp(0, 0),
       'userHighScoreOfAll': 0,
       'sameAddHighScore': 0,
       'diffAddHighScore': 0,
@@ -94,7 +99,12 @@ class UserData with ChangeNotifier {
       'mixHighScore': 0
     };
     userRanking = 0;
+    isLogin = false;
 
+    notifyListeners();
+  }
+
+  void justNotify() {
     notifyListeners();
   }
 
