@@ -1,12 +1,9 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/user_data.dart';
-import 'package:calculation_game/widget/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:provider/provider.dart';
 
 class UserPasswordUpdateScreen extends StatefulWidget {
   const UserPasswordUpdateScreen({Key? key}) : super(key: key);

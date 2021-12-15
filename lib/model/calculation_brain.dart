@@ -527,6 +527,11 @@ class CalculationBrain {
       }
 
       bool random_bool = Random().nextBool();
+      // if (random_bool) {
+      //   print(calExpression1);
+      // } else {
+      //   print(calExpression2);
+      // }
 
       realAnswer = random_bool
           ? MathNodeExpression.fromString(calExpression1)
@@ -538,7 +543,9 @@ class CalculationBrain {
 
       if (realAnswer.numerator.abs() >= 100 ||
           realAnswer.denominator.abs() >= 100) {
+        // print('reset done');
         resetNumber();
+        return;
       }
 
       questionWidget = Row(
@@ -628,6 +635,8 @@ class CalculationBrain {
 
       choiceSet.add(realAnswer);
 
+      // print(realAnswer);
+
       while (choiceSet.length < 4) {
         choiceSet.add(
           Random().nextBool()
@@ -640,8 +649,10 @@ class CalculationBrain {
                   .reduce(),
         );
       }
+
       choiceList = [...choiceSet];
       choiceList.shuffle();
+      // print(choiceList);
 
       choiceA_value = choiceList[0];
       choiceB_value = choiceList[1];

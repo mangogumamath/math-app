@@ -1,6 +1,5 @@
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/user_data.dart';
-import 'package:calculation_game/widget/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

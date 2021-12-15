@@ -1,8 +1,6 @@
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/user_data.dart';
-import 'package:calculation_game/screens/login_screen.dart';
-import 'package:calculation_game/screens/registration_screen.dart';
 import 'package:calculation_game/screens/userconfig_screen.dart';
 import 'package:calculation_game/widget/reusable_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';

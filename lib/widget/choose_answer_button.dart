@@ -10,14 +10,14 @@ class ChooseAnswerButton extends StatelessWidget {
       void Function()? onPressed}) {
     this.buttonText = buttonText ?? '';
     this.buttonChild = buttonChild ?? SizedBox();
-    this.fontsize = fontsize ?? 50.0;
+    this.fontsize = fontsize ?? 45.0;
     this.onPressed = onPressed ?? () {};
     this.isDisabled = isDisabled ?? false;
   }
   bool isDisabled = false;
   String buttonText = '';
   Widget buttonChild = SizedBox();
-  double fontsize = 50.0;
+  double fontsize = 45.0;
   void Function() onPressed = () {};
 
   @override
@@ -32,7 +32,7 @@ class ChooseAnswerButton extends StatelessWidget {
 
     return Expanded(
       child: Container(
-        margin: EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         child: ElevatedButton(
           style: calculationButtonStyle,
           child: buttonChild,

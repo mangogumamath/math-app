@@ -51,7 +51,21 @@ class UserData with ChangeNotifier {
   // };
 
   Future<void> signInUserData(User user) async {
-    // userDataMap = userDataMapForClear;
+    userDataMap = {
+      'uid': '',
+      'email': '',
+      'nickName': ' 로그인 하세요',
+      'registrationTimestamp': Timestamp(0, 0),
+      'userHighScoreOfAll': 0,
+      'sameAddHighScore': 0,
+      'diffAddHighScore': 0,
+      'subtractionHighScore': 0,
+      'addSubHighScore': 0,
+      'multiplicationTwoHighScore': 0,
+      'multiplicationManyHighScore': 0,
+      'divisionHighScore': 0,
+      'mixHighScore': 0,
+    };
     userRanking = 0;
     isLogin = true;
 
@@ -96,7 +110,7 @@ class UserData with ChangeNotifier {
       'multiplicationTwoHighScore': 0,
       'multiplicationManyHighScore': 0,
       'divisionHighScore': 0,
-      'mixHighScore': 0
+      'mixHighScore': 0,
     };
     userRanking = 0;
     isLogin = false;
@@ -109,14 +123,14 @@ class UserData with ChangeNotifier {
   }
 
   void checkUserHighScoreOfAll() {
-    List _scoreList = [];
-    userDataMap.values.toList().forEach((e) {
-      if (e is int) {
-        _scoreList.add(e);
-      }
-    });
-    userDataMap['userHighScoreOfAll'] =
-        _scoreList.reduce((value, element) => value + element);
+    userDataMap['userHighScoreOfAll'] = userDataMap['sameAddHighScore'] +
+        userDataMap['diffAddHighScore'] +
+        userDataMap['subtractionHighScore'] +
+        userDataMap['addSubHighScore'] +
+        userDataMap['multiplicationTwoHighScore'] +
+        userDataMap['multiplicationManyHighScore'] +
+        userDataMap['divisionHighScore'] +
+        userDataMap['mixHighScore'];
 
     notifyListeners();
   }
@@ -127,7 +141,7 @@ class UserData with ChangeNotifier {
         .where('userHighScoreOfAll',
             isGreaterThan: userDataMap['userHighScoreOfAll'])
         .orderBy('userHighScoreOfAll', descending: true)
-        .limit(100)
+        // .limit(100)
         .get()
         .then((QuerySnapshot querySnapshot) {
       userRanking = querySnapshot.docs.length + 1;

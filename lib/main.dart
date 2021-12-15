@@ -3,6 +3,7 @@ import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/calculation_main_screen.dart';
 import 'package:calculation_game/screens/leaderboard_screen.dart';
 import 'package:calculation_game/screens/my_screen.dart';
+import 'package:calculation_game/screens/test/testpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class _CalculationGameState extends State<CalculationGame> {
         //           // buttonTheme: ButtonThemeData(buttonColor: Color(0xFF03DAC5)),
         //         ),
         home: DefaultTabController(
-            length: 3,
+            length: 4,
             child: Scaffold(
               appBar: AppBar(
                 title: const Center(child: Text('무한의 계산')),
@@ -101,6 +102,7 @@ class _CalculationGameState extends State<CalculationGame> {
                   CalculationMainScreen(),
                   LeaderBoardScreen(),
                   MyScreen(),
+                  TestPage(),
                 ],
               ),
               bottomNavigationBar: Column(
@@ -130,6 +132,13 @@ class _CalculationGameState extends State<CalculationGame> {
                             size: 25.0,
                           ),
                           // text: '홈',
+                        ),
+                        Tab(
+                          icon: Icon(
+                            Icons.person,
+                            size: 30.0,
+                          ),
+// text: 'my',
                         ),
                         Tab(
                           icon: Icon(

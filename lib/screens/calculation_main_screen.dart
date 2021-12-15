@@ -5,7 +5,6 @@ import 'package:calculation_game/screens/main_calculation_screens/main_div_scree
 import 'package:calculation_game/screens/main_calculation_screens/main_mix_screen.dart';
 import 'package:calculation_game/screens/main_calculation_screens/main_mul_screen.dart';
 import 'package:calculation_game/screens/main_calculation_screens/main_sub_screen.dart';
-import 'package:calculation_game/widget/mainselect_button.dart';
 import 'package:calculation_game/widget/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

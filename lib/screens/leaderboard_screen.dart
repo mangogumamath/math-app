@@ -1,16 +1,12 @@
-import 'package:calculation_game/constants.dart';
+import 'dart:async';
+
 import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/user_data.dart';
-import 'package:calculation_game/screens/login_screen.dart';
-import 'package:calculation_game/screens/registration_screen.dart';
-import 'package:calculation_game/screens/userconfig_screen.dart';
 import 'package:calculation_game/widget/reusable_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LeaderBoardScreen extends StatefulWidget {
   const LeaderBoardScreen({Key? key}) : super(key: key);
@@ -26,7 +22,9 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   int userHighScoreOfAll = 0;
   Map rankerMap = {};
 
-  final _auth = FirebaseAuth.instance;
+  bool isLoadRankerButtonDisabled = false;
+
+  // final _auth = FirebaseAuth.instance;
 
   // void _loadScore() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -41,20 +39,20 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
 
   Future<void> loadRanker() async {
     try {
+      rankerMap = {};
       await FirebaseFirestore.instance
           .collection('UserData')
           .orderBy('userHighScoreOfAll', descending: true)
-          .limit(50)
+          .limit(100)
           .get()
           .then((QuerySnapshot querySnapshot) {
         int _counter = 0;
-        querySnapshot.docs
-            .forEach((QueryDocumentSnapshot queryDocumentSnapshot) {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
           _counter++;
           final queryUserMap =
               queryDocumentSnapshot.data() as Map<String, dynamic>;
           rankerMap['$_counter'] = queryUserMap;
-        });
+        }
       });
       setState(() {});
     } catch (e) {
@@ -82,7 +80,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
         color: Colors.brown,
       );
     } else {
-      return FaIcon(
+      return const FaIcon(
         FontAwesomeIcons.chessPawn,
         size: 0.0,
         color: Colors.white,
@@ -95,14 +93,16 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
     // TODO: implement initState
     super.initState();
     adMob.myBanner.load();
+    loadRanker();
   }
 
   @override
   Widget build(BuildContext context) {
     _userDataMap = Provider.of<UserData>(context).userDataMap;
-    nickName = Provider.of<UserData>(context).userDataMap['nickName'];
+    nickName = _userDataMap['nickName'];
     userRanking = Provider.of<UserData>(context).userRanking;
-    loadRanker();
+    userHighScoreOfAll = _userDataMap['userHighScoreOfAll'];
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -160,6 +160,30 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
               ],
             ),
           ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            const SizedBox(),
+            const Text(
+              '1위~100위',
+              style: TextStyle(fontSize: 25.0),
+            ),
+            ElevatedButton(
+              onPressed: isLoadRankerButtonDisabled
+                  ? null
+                  : () async {
+                      isLoadRankerButtonDisabled = true;
+                      setState(() {});
+                      loadRanker();
+                      Future.delayed(const Duration(seconds: 5), () {
+                        isLoadRankerButtonDisabled = false;
+                        setState(() {});
+                      });
+                    },
+              child: const FaIcon(
+                FontAwesomeIcons.syncAlt,
+                size: 25.0,
+              ),
+            ),
+          ]),
 
           Expanded(
             child: Scrollbar(
@@ -168,7 +192,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
               child: ListView.builder(
                 controller: scrollController,
                 padding: const EdgeInsets.all(8.0),
-                itemCount: 50,
+                itemCount: 100,
                 itemBuilder: (BuildContext context, int index) {
                   Map<String, dynamic> empty = {
                     'nickName': '',
@@ -184,7 +208,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                           children: [
                             Text(
                               '${index + 1} 위 ',
-                              style: TextStyle(fontSize: 30.0),
+                              style: const TextStyle(fontSize: 30.0),
                             ),
                             topRankerIcon(index + 1),
                           ],
@@ -196,14 +220,14 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                               ranker.containsKey('nickName')
                                   ? ranker['nickName']
                                   : 'unknown',
-                              style: TextStyle(fontSize: 25.0),
+                              style: const TextStyle(fontSize: 25.0),
                             ),
                             Text(
                               ranker.containsKey('userHighScoreOfAll')
                                   ? ranker['userHighScoreOfAll'].toString() +
                                       ' 점'
                                   : 'unknown',
-                              style: TextStyle(fontSize: 25.0),
+                              style: const TextStyle(fontSize: 25.0),
                             ),
                           ],
                         ),

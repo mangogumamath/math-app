@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PracticeScreen extends StatefulWidget {
-  PracticeScreen({required this.calculationType});
+  PracticeScreen({Key? key, required this.calculationType}) : super(key: key);
   CalculationType calculationType;
   @override
   _PracticeScreenState createState() => _PracticeScreenState();
@@ -110,7 +110,7 @@ class _PracticeScreenState extends State<PracticeScreen>
     //맞고 틀림 위젯 애니메이션 관리
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
     );
     animation =
         CurvedAnimation(parent: animationController, curve: Curves.elasticOut);
@@ -153,16 +153,16 @@ class _PracticeScreenState extends State<PracticeScreen>
                 // adMob.showInterstitialAd();
               }
               return AlertDialog(
-                title: Text('결과'),
+                title: const Text('결과'),
                 titleTextStyle:
-                    TextStyle(fontSize: 30.0, fontFamily: 'ONEMobilePOP'),
+                    const TextStyle(fontSize: 30.0, fontFamily: 'ONEMobilePOP'),
                 contentTextStyle:
-                    TextStyle(fontSize: 40.0, fontFamily: 'ONEMobilePOP'),
+                    const TextStyle(fontSize: 40.0, fontFamily: 'ONEMobilePOP'),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: [
                       adMob.adContainer,
-                      SizedBox(
+                      const SizedBox(
                         height: 30.0,
                       ),
                       Center(
@@ -173,7 +173,7 @@ class _PracticeScreenState extends State<PracticeScreen>
                       Center(
                         child: Text(
                           '최고점수: ' + _maxScore.toString() + ' 점',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 30.0, fontFamily: 'ONEMobilePOP'),
                         ),
                       ),
@@ -185,7 +185,7 @@ class _PracticeScreenState extends State<PracticeScreen>
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text('확인')),
+                      child: const Text('확인')),
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -194,7 +194,7 @@ class _PracticeScreenState extends State<PracticeScreen>
                                   calculationType: widget.calculationType,
                                 )));
                       },
-                      child: Text('다시 하기')),
+                      child: const Text('다시 하기')),
                 ],
               );
             });
@@ -254,7 +254,7 @@ class _PracticeScreenState extends State<PracticeScreen>
           calculationBrain.choiceA_value.denominator,
           dividerColor: Colors.black,
           dividerWidth: 30.0,
-          textStyle: TextStyle(fontSize: 30.0),
+          textStyle: const TextStyle(fontSize: 30.0),
         ),
         onPressed: () {
           chooseAnswerButton_function(calculationBrain.choiceA_value);
@@ -267,7 +267,7 @@ class _PracticeScreenState extends State<PracticeScreen>
           calculationBrain.choiceB_value.denominator,
           dividerColor: Colors.black,
           dividerWidth: 30.0,
-          textStyle: TextStyle(fontSize: 30.0),
+          textStyle: const TextStyle(fontSize: 30.0),
         ),
         onPressed: () {
           chooseAnswerButton_function(calculationBrain.choiceB_value);
@@ -280,7 +280,7 @@ class _PracticeScreenState extends State<PracticeScreen>
           calculationBrain.choiceC_value.denominator,
           dividerColor: Colors.black,
           dividerWidth: 30.0,
-          textStyle: TextStyle(fontSize: 30.0),
+          textStyle: const TextStyle(fontSize: 30.0),
         ),
         onPressed: () {
           chooseAnswerButton_function(calculationBrain.choiceC_value);
@@ -293,7 +293,7 @@ class _PracticeScreenState extends State<PracticeScreen>
           calculationBrain.choiceD_value.denominator,
           dividerColor: Colors.black,
           dividerWidth: 30.0,
-          textStyle: TextStyle(fontSize: 30.0),
+          textStyle: const TextStyle(fontSize: 30.0),
         ),
         onPressed: () {
           chooseAnswerButton_function(calculationBrain.choiceD_value);
@@ -342,7 +342,7 @@ class _PracticeScreenState extends State<PracticeScreen>
                 children: [
                   Text(
                     '점수: ' + calculationBrain.score.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 40.0,
                     ),
                   ),

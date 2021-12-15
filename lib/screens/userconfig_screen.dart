@@ -4,15 +4,11 @@ import 'package:calculation_game/screens/login_screen.dart';
 import 'package:calculation_game/screens/registration_screen.dart';
 import 'package:calculation_game/screens/userdelete_screen.dart';
 import 'package:calculation_game/screens/userpassword_update_screen.dart';
-import 'package:calculation_game/widget/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class UserConfigScreen extends StatefulWidget {
   const UserConfigScreen({Key? key}) : super(key: key);
