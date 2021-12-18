@@ -33,7 +33,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   //   });
   // }
 
-  AdMob adMob = AdMob();
+  // AdMob adMob = AdMob();
 
   final scrollController = ScrollController();
 
@@ -92,7 +92,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    adMob.myBanner.load();
+    // adMob.myBanner.load();
     loadRanker();
   }
 

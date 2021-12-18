@@ -1,9 +1,11 @@
 import 'package:calculation_game/model/admob.dart';
+import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/calculation_main_screen.dart';
 import 'package:calculation_game/screens/leaderboard_screen.dart';
 import 'package:calculation_game/screens/my_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -39,10 +41,9 @@ class _MainScreenState extends State<MainScreen> {
 // TabBarView
             body: IndexedStack(
               index: _widgetIndex,
-              children: [
-// HomeScreen(),
+              children: const [
                 CalculationMainScreen(),
-                const LeaderBoardScreen(),
+                LeaderBoardScreen(),
                 MyScreen(),
                 // TestPage(),
               ],

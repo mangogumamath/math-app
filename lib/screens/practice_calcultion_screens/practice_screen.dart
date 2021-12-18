@@ -150,7 +150,7 @@ class _PracticeScreenState extends State<PracticeScreen>
             context: context,
             builder: (context) {
               if (Random().nextInt(10) + 1 <= 3) {
-                // adMob.showInterstitialAd();
+                adMob.showInterstitialAd();
               }
               return AlertDialog(
                 title: const Text('결과'),

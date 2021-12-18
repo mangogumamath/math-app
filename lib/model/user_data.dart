@@ -18,6 +18,8 @@ class UserData with ChangeNotifier {
   List topRankerList = [];
   bool isLogin = false;
 
+  bool isNavigator = false;
+
   //사용자 데이터
   Map<String, dynamic> userDataMap = {
     'uid': '',

@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyScreen extends StatefulWidget {
+  const MyScreen({Key? key}) : super(key: key);
+
   @override
   _MyScreenState createState() => _MyScreenState();
 }
@@ -28,7 +30,7 @@ class _MyScreenState extends State<MyScreen> {
   //   });
   // }
 
-  AdMob adMob = AdMob();
+  // AdMob adMob = AdMob();
 
   final scrollController = ScrollController();
 
@@ -36,7 +38,7 @@ class _MyScreenState extends State<MyScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    adMob.myBanner.load();
+    // adMob.myBanner.load();
   }
 
   Future<void> _removeScore() async {
