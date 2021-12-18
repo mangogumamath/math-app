@@ -32,7 +32,7 @@ class _CalculationMainScreenState extends State<CalculationMainScreen> {
           const SizedBox(
             height: 10.0,
           ),
-          adMob.adContainer,
+          // adMob.adContainer,
           const Padding(
             padding: EdgeInsets.all(10.0),
             child: Text(

@@ -27,8 +27,8 @@ class AdMob {
     myBanner = BannerAd(
       adUnitId: adUnitIdBanner,
       size: AdSize.banner,
-      request: AdRequest(),
-      listener: BannerAdListener(),
+      request: const AdRequest(),
+      listener: const BannerAdListener(),
     );
     adWidget = AdWidget(ad: myBanner);
     adContainer = Container(
@@ -42,7 +42,7 @@ class AdMob {
   void showInterstitialAd() {
     InterstitialAd.load(
         adUnitId: adUnitIdInterstitial,
-        request: AdRequest(),
+        request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             // Keep a reference to the ad so you can show it later.

@@ -111,7 +111,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
           const SizedBox(
             height: 10.0,
           ),
-          adMob.adContainer,
+          // adMob.adContainer,
           const SizedBox(
             height: 10.0,
           ),

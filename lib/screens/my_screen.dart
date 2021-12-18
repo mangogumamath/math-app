@@ -58,7 +58,7 @@ class _MyScreenState extends State<MyScreen> {
           const SizedBox(
             height: 10.0,
           ),
-          adMob.adContainer,
+          // adMob.adContainer,
           const SizedBox(
             height: 10.0,
           ),
