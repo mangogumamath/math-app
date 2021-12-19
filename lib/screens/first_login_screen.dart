@@ -1,5 +1,7 @@
 import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/main_screen.dart';
+import 'package:calculation_game/widget/anonymous_login_button.dart';
+import 'package:calculation_game/widget/google_login_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -60,116 +62,61 @@ class _FirstLoginScreenState extends State<FirstLoginScreen> {
               ),
               const Expanded(flex: 3, child: SizedBox()),
               SizedBox(
+                height: 150.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
                       visible: !isLogin,
-                      child: Card(
-                        color: Colors.white,
-                        child: InkWell(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: SizedBox(
-                              height: 50.0,
-                              width: 250.0,
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    Image(
-                                      height: 40.0,
-                                      width: 40.0,
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'images/google_logo_icon.png'),
-                                    ),
-                                    Text(
-                                      '구글 로그인',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: Colors.black45),
-                                    ),
-                                    SizedBox(
-                                      width: 10.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          onTap: () async {
-                            try {
-                              final userCredential = await signInWithGoogle();
-                              if (userCredential.user != null) {
-                                Provider.of<UserData>(context, listen: false)
-                                    .signInUserData(userCredential.user!);
-                              }
-                            } catch (e) {
-                              print(e);
+                      child: GoogleLoginButton(
+                        onTap: () async {
+                          try {
+                            final userCredential = await signInWithGoogle();
+                            if (userCredential.additionalUserInfo != null) {
+                              await Provider.of<UserData>(context,
+                                      listen: false)
+                                  .isNewUserRegisterData(userCredential);
                             }
-                          },
-                        ),
+                            if (userCredential.user != null) {
+                              await Provider.of<UserData>(context,
+                                      listen: false)
+                                  .signInUserData(userCredential.user!);
+                              isLogin = true;
+                            }
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                       ),
                     ),
                     Visibility(
                       visible: !isLogin,
-                      child: Card(
-                        color: Colors.grey,
-                        child: InkWell(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: SizedBox(
-                              height: 50.0,
-                              width: 250.0,
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    Image(
-                                      height: 40.0,
-                                      width: 40.0,
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'images/anonymous_user.png'),
-                                    ),
-                                    Text(
-                                      '게스트 로그인',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: Colors.black45),
-                                    ),
-                                    SizedBox(
-                                      width: 10.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          onTap: () async {
-                            try {
-                              final userCredential =
-                                  await _auth.signInAnonymously();
-                              if (userCredential.user != null) {
-                                Provider.of<UserData>(context, listen: false)
-                                    .signInUserData(userCredential.user!);
-                              }
-                            } catch (e) {
-                              print(e);
+                      child: AnonymousLoginButton(
+                        onTap: () async {
+                          try {
+                            final userCredential =
+                                await _auth.signInAnonymously();
+                            if (userCredential.additionalUserInfo != null) {
+                              await Provider.of<UserData>(context,
+                                      listen: false)
+                                  .isNewUserRegisterData(userCredential);
                             }
-                          },
-                        ),
+                            if (userCredential.user != null) {
+                              await Provider.of<UserData>(context,
+                                      listen: false)
+                                  .signInUserData(userCredential.user!);
+                              isLogin = true;
+                            }
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                       ),
                     ),
                     Visibility(
                       visible: isLogin,
                       child: const Text(
-                        '아무 곳이나 누르세요',
+                        '화면을 터치하세요',
                         style: TextStyle(fontSize: 15.0),
                       ),
                     ),

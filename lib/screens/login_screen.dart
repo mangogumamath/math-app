@@ -1,8 +1,12 @@
 import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/user_data.dart';
+import 'package:calculation_game/screens/main_screen.dart';
+import 'package:calculation_game/widget/anonymous_login_button.dart';
+import 'package:calculation_game/widget/google_login_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -18,115 +22,75 @@ class _LoginScreenState extends State<LoginScreen> {
   String email = '';
   String password = '';
 
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await _auth.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('로그인'),
-        actions: [
-          TextButton(
-            child: Text(
-              '확인',
-              style: TextStyle(color: Color(0xffbb86fc), fontSize: 20.0),
-            ),
-            onPressed: () async {
-              setState(() {
-                showSpinner = true;
-              });
-              try {
-                final userCredential = await _auth.signInWithEmailAndPassword(
-                    email: email, password: password);
-                if (userCredential.user != null) {
-                  Provider.of<UserData>(context, listen: false)
-                      .signInUserData(userCredential.user!);
-                }
-
-                setState(() {
-                  showSpinner = false;
-                });
-                Navigator.pop(context);
-              } catch (e) {
-                print(e);
-              }
-            },
-          )
-        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      body: Center(
         child: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                SizedBox(
-                  height: 20.0,
+                GoogleLoginButton(
+                  onTap: () async {
+                    try {
+                      final userCredential = await signInWithGoogle();
+                      if (userCredential.additionalUserInfo != null) {
+                        await Provider.of<UserData>(context, listen: false)
+                            .isNewUserRegisterData(userCredential);
+                      }
+                      if (userCredential.user != null) {
+                        await Provider.of<UserData>(context, listen: false)
+                            .signInUserData(userCredential.user!);
+                        Navigator.pop(context);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
                 ),
-                TextField(
-                    style: kTextFieldTextStyle,
-                    keyboardType: TextInputType.emailAddress,
-                    textAlign: TextAlign.center,
-                    onChanged: (value) {
-                      email = value;
-                    },
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: '이메일',
-                      icon: const FaIcon(
-                        FontAwesomeIcons.solidEnvelope,
-                        color: Colors.white,
-                        size: 25.0,
-                      ),
-                    )),
-                SizedBox(
-                  height: 8.0,
+                AnonymousLoginButton(
+                  onTap: () async {
+                    try {
+                      final userCredential = await _auth.signInAnonymously();
+                      print(userCredential);
+                      if (userCredential.additionalUserInfo != null) {
+                        await Provider.of<UserData>(context, listen: false)
+                            .isNewUserRegisterData(userCredential);
+                      }
+                      if (userCredential.user != null) {
+                        await Provider.of<UserData>(context, listen: false)
+                            .signInUserData(userCredential.user!);
+                        Navigator.pop(context);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
                 ),
-                TextField(
-                    style: kTextFieldTextStyle,
-                    obscureText: true,
-                    obscuringCharacter: '*',
-                    textAlign: TextAlign.center,
-                    onChanged: (value) {
-                      password = value;
-                    },
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: '비밀번호',
-                      icon: const FaIcon(
-                        FontAwesomeIcons.key,
-                        color: Colors.white,
-                        size: 25.0,
-                      ),
-                    )),
-                SizedBox(
-                  height: 24.0,
-                ),
-                // RoundedButton(
-                //   color: Color(0xffbb86fc),
-                //   buttonText: '로그인',
-                //   onPressed: () async {
-                //     setState(() {
-                //       showSpinner = true;
-                //     });
-                //     try {
-                //       final userCredential =
-                //           await _auth.signInWithEmailAndPassword(
-                //               email: email, password: password);
-                //       if (userCredential.user != null) {
-                //         Provider.of<UserData>(context, listen: false)
-                //             .signInUserData(userCredential.user!);
-                //       }
-                //
-                //       setState(() {
-                //         showSpinner = false;
-                //       });
-                //     } catch (e) {
-                //       print(e);
-                //     }
-                //     Navigator.pop(context);
-                //   },
-                // ),
               ],
             ),
           ),

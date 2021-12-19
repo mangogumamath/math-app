@@ -103,155 +103,165 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
     userRanking = Provider.of<UserData>(context).userRanking;
     userHighScoreOfAll = _userDataMap['userHighScoreOfAll'];
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 10.0,
-          ),
-          // adMob.adContainer,
-          const SizedBox(
-            height: 10.0,
-          ),
-          ReusableCard(
-            colour: const Color(0xff1E1E1E),
-            cardChild: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const FaIcon(
-                        FontAwesomeIcons.solidUserCircle,
-                        size: 30.0,
-                      ),
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                ' ' + nickName,
-                                style: const TextStyle(fontSize: 25.0),
-                                // overflow: TextOverflow.clip,
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                ' ' +
-                                    userRanking.toString() +
-                                    ' 위' +
-                                    '   ' +
-                                    userHighScoreOfAll.toString() +
-                                    ' 점',
-                                style: const TextStyle(fontSize: 20.0),
-                                // overflow: TextOverflow.clip,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            const SizedBox(),
-            const Text(
-              '1위~100위',
-              style: TextStyle(fontSize: 25.0),
-            ),
-            ElevatedButton(
-              onPressed: isLoadRankerButtonDisabled
-                  ? null
-                  : () async {
-                      isLoadRankerButtonDisabled = true;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          '순위',
+          style: TextStyle(),
+        ),
+        // toolbarHeight: 50.0,
+        actions: [
+          IconButton(
+            onPressed: isLoadRankerButtonDisabled
+                ? null
+                : () async {
+                    isLoadRankerButtonDisabled = true;
+                    setState(() {});
+                    loadRanker();
+                    Future.delayed(const Duration(seconds: 5), () {
+                      isLoadRankerButtonDisabled = false;
                       setState(() {});
-                      loadRanker();
-                      Future.delayed(const Duration(seconds: 5), () {
-                        isLoadRankerButtonDisabled = false;
-                        setState(() {});
-                      });
-                    },
-              child: const FaIcon(
-                FontAwesomeIcons.syncAlt,
-                size: 25.0,
-              ),
+                    });
+                  },
+            icon: const FaIcon(
+              FontAwesomeIcons.syncAlt,
+              size: 25.0,
             ),
-          ]),
-
-          Expanded(
-            child: Scrollbar(
-              controller: scrollController,
-              isAlwaysShown: true,
-              child: ListView.builder(
-                controller: scrollController,
-                padding: const EdgeInsets.all(8.0),
-                itemCount: 100,
-                itemBuilder: (BuildContext context, int index) {
-                  Map<String, dynamic> empty = {
-                    'nickName': '',
-                    'userHighScoreOfAll': ''
-                  };
-                  Map<String, dynamic> ranker =
-                      rankerMap['${index + 1}'] ?? empty;
-                  return ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 10.0,
+            ),
+            // adMob.adContainer,
+            const SizedBox(
+              height: 10.0,
+            ),
+            ReusableCard(
+              colour: const Color(0xff1E1E1E),
+              cardChild: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              '${index + 1} 위 ',
-                              style: const TextStyle(fontSize: 30.0),
-                            ),
-                            topRankerIcon(index + 1),
-                          ],
+                        const FaIcon(
+                          FontAwesomeIcons.solidUserCircle,
+                          size: 30.0,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              ranker.containsKey('nickName')
-                                  ? ranker['nickName']
-                                  : 'unknown',
-                              style: const TextStyle(fontSize: 25.0),
-                            ),
-                            Text(
-                              ranker.containsKey('userHighScoreOfAll')
-                                  ? ranker['userHighScoreOfAll'].toString() +
-                                      ' 점'
-                                  : 'unknown',
-                              style: const TextStyle(fontSize: 25.0),
-                            ),
-                          ],
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  ' ' + nickName,
+                                  style: const TextStyle(fontSize: 25.0),
+                                  // overflow: TextOverflow.clip,
+                                ),
+                              ),
+                              Flexible(
+                                child: Text(
+                                  ' ' +
+                                      userRanking.toString() +
+                                      ' 위' +
+                                      '   ' +
+                                      userHighScoreOfAll.toString() +
+                                      ' 점',
+                                  style: const TextStyle(fontSize: 20.0),
+                                  // overflow: TextOverflow.clip,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             ),
-          ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+              Text(
+                '1위~100위',
+                style: TextStyle(fontSize: 25.0),
+              ),
+            ]),
 
-          //최고점수 삭제 버튼
-          // ElevatedButton(
-          //     onPressed: _removeScore, child: FaIcon(FontAwesomeIcons.eraser)),
-          // Text('로그인'),
-          // Text(
-          //   '본 앱은 정수와 유리수의 계산을 연습하기 위해 만들어졌습니다.',
-          //   style: TextStyle(fontSize: 40.0),
-          // ),
-          // Text(
-          //   '기능 준비중',
-          //   style: TextStyle(fontSize: 40.0),
-          // ),
-        ],
+            Expanded(
+              child: Scrollbar(
+                controller: scrollController,
+                isAlwaysShown: true,
+                child: ListView.builder(
+                  controller: scrollController,
+                  padding: const EdgeInsets.all(8.0),
+                  itemCount: 100,
+                  itemBuilder: (BuildContext context, int index) {
+                    Map<String, dynamic> empty = {
+                      'nickName': '',
+                      'userHighScoreOfAll': ''
+                    };
+                    Map<String, dynamic> ranker =
+                        rankerMap['${index + 1}'] ?? empty;
+                    return ListTile(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                '${index + 1} 위 ',
+                                style: const TextStyle(fontSize: 30.0),
+                              ),
+                              topRankerIcon(index + 1),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                ranker.containsKey('nickName')
+                                    ? ranker['nickName']
+                                    : 'unknown',
+                                style: const TextStyle(fontSize: 25.0),
+                              ),
+                              Text(
+                                ranker.containsKey('userHighScoreOfAll')
+                                    ? ranker['userHighScoreOfAll'].toString() +
+                                        ' 점'
+                                    : 'unknown',
+                                style: const TextStyle(fontSize: 25.0),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            //최고점수 삭제 버튼
+            // ElevatedButton(
+            //     onPressed: _removeScore, child: FaIcon(FontAwesomeIcons.eraser)),
+            // Text('로그인'),
+            // Text(
+            //   '본 앱은 정수와 유리수의 계산을 연습하기 위해 만들어졌습니다.',
+            //   style: TextStyle(fontSize: 40.0),
+            // ),
+            // Text(
+            //   '기능 준비중',
+            //   style: TextStyle(fontSize: 40.0),
+            // ),
+          ],
+        ),
       ),
     );
   }

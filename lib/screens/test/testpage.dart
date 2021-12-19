@@ -1,5 +1,7 @@
 import 'package:calculation_game/constants.dart';
+import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/calculation_brain.dart';
+import 'package:calculation_game/screens/main_calculation_screens/main_add_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -13,6 +15,8 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   final calBrain = CalculationBrain(calculationType: CalculationType.mix);
+
+  AdMob adMob = AdMob();
 
   // Future<UserCredential> signInWithGoogle() async {
   //   // Trigger the authentication flow
@@ -33,21 +37,28 @@ class _TestPageState extends State<TestPage> {
   // }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    adMob.myBanner.load();
+  }
+
+  @override
   Widget build(BuildContext context) {
     String text = '(6*(-1)^2)-1/3';
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          adMob.adContainer,
           // calBrain.questionWidget,
           // Text('${MathNodeExpression.fromString(text).calc(MathVariableValues({
           //           'x': 0
           //         })).toFraction()}'),
           ElevatedButton(
             onPressed: () {
-              setState(() {
-                // signInWithGoogle();
-              });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainAddScreen()));
             },
             child: Text('버튼'),
           )

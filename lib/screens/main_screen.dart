@@ -3,9 +3,12 @@ import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/calculation_main_screen.dart';
 import 'package:calculation_game/screens/leaderboard_screen.dart';
 import 'package:calculation_game/screens/my_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+
+import '../constants.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -22,11 +25,88 @@ class _MainScreenState extends State<MainScreen> {
 
   AdMob adMob = AdMob();
 
+  String nickName = '';
+
+  Future<void> nickNameNullCheck() async {
+    if (Provider.of<UserData>(context, listen: false).userDataMap['nickName'] ==
+        '') {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            '닉네임 설정',
+            style: TextStyle(
+              fontSize: 30.0,
+            ),
+          ),
+          content: TextField(
+              style: kTextFieldTextStyle,
+              keyboardType: TextInputType.name,
+              textAlign: TextAlign.center,
+              onChanged: (value) {
+                nickName = value;
+              },
+              decoration: kTextFieldDecoration.copyWith(
+                hintText: '닉네임',
+                icon: const FaIcon(
+                  FontAwesomeIcons.solidSmile,
+                  color: Colors.white,
+                  size: 25.0,
+                ),
+              )),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text(
+                '취소',
+                style: TextStyle(fontSize: 20.0, color: Colors.white),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Change'),
+              child: const Text(
+                '설정',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ).then((returnVal) async {
+        if (returnVal == 'Change') {
+          try {
+            Provider.of<UserData>(context, listen: false)
+                .userDataMap['nickName'] = nickName;
+            final uid = Provider.of<UserData>(context, listen: false)
+                .userDataMap['uid'];
+            await FirebaseFirestore.instance
+                .collection('UserData')
+                .doc(uid)
+                .set({
+                  'nickName': nickName,
+                }, SetOptions(merge: true))
+                .then((value) => print("Score merged with existing data!"))
+                .catchError((error) => print("Failed to merge data: $error"));
+
+            Provider.of<UserData>(context, listen: false).justNotify();
+          } catch (e) {
+            print(e);
+          }
+        }
+      });
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     adMob.myBanner.load();
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      nickNameNullCheck();
+    });
   }
 
   @override
@@ -73,7 +153,7 @@ class _MainScreenState extends State<MainScreen> {
                     Tab(
                       icon: FaIcon(
                         FontAwesomeIcons.crown,
-                        size: 25.0,
+                        size: 20.0,
                       ),
                       // text: '순위',
                     ),

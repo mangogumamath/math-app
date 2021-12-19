@@ -17,14 +17,13 @@ class UserData with ChangeNotifier {
   int userRanking = 0;
   List topRankerList = [];
   bool isLogin = false;
-
-  bool isNavigator = false;
+  bool isAnonymousLogin = false;
 
   //사용자 데이터
   Map<String, dynamic> userDataMap = {
     'uid': '',
     'email': '',
-    'nickName': '로그인 하세요',
+    'nickName': '',
     'registrationTimestamp': Timestamp(0, 0),
     'userHighScoreOfAll': 0,
     'sameAddHighScore': 0,
@@ -51,12 +50,37 @@ class UserData with ChangeNotifier {
   //   'divisionHighScore': 0,
   //   'mixHighScore': 0
   // };
+  Future<void> isNewUserRegisterData(UserCredential newUserCredential) async {
+    if (newUserCredential.additionalUserInfo!.isNewUser) {
+      try {
+        print('new User exist');
+
+        final time = Timestamp.now();
+        final registrationTimestamp =
+            DateTime.fromMicrosecondsSinceEpoch(time.microsecondsSinceEpoch);
+        userDataMap['registrationTimestamp'] = registrationTimestamp;
+
+        final uid = newUserCredential.user!.uid;
+        await FirebaseFirestore.instance
+            .collection('UserData')
+            .doc(uid)
+            .set({
+              'uid': uid,
+              'registrationTimestamp': registrationTimestamp,
+            }, SetOptions(merge: true))
+            .then((value) => print("Score merged with existing data!"))
+            .catchError((error) => print("Failed to merge data: $error"));
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   Future<void> signInUserData(User user) async {
     userDataMap = {
       'uid': '',
       'email': '',
-      'nickName': ' 로그인 하세요',
+      'nickName': '',
       'registrationTimestamp': Timestamp(0, 0),
       'userHighScoreOfAll': 0,
       'sameAddHighScore': 0,
@@ -70,6 +94,10 @@ class UserData with ChangeNotifier {
     };
     userRanking = 0;
     isLogin = true;
+
+    if (user.isAnonymous) {
+      isAnonymousLogin = true;
+    }
 
     //uid 받기
     final uid = user.uid;
@@ -102,7 +130,7 @@ class UserData with ChangeNotifier {
     userDataMap = {
       'uid': '',
       'email': '',
-      'nickName': ' 로그인 하세요',
+      'nickName': '',
       'registrationTimestamp': Timestamp(0, 0),
       'userHighScoreOfAll': 0,
       'sameAddHighScore': 0,
@@ -116,6 +144,7 @@ class UserData with ChangeNotifier {
     };
     userRanking = 0;
     isLogin = false;
+    isAnonymousLogin = false;
 
     notifyListeners();
   }
