@@ -1,14 +1,14 @@
 import 'package:calculation_game/constants.dart';
+import 'package:calculation_game/model/profanity_text.dart';
 import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/login_screen.dart';
-import 'package:calculation_game/screens/registration_screen.dart';
-import 'package:calculation_game/screens/userdelete_screen.dart';
-import 'package:calculation_game/screens/userpassword_update_screen.dart';
+import 'package:calculation_game/widget/agree_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:provider/provider.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -27,6 +27,8 @@ class _SettingScreenState extends State<SettingScreen> {
   String nickName = '';
   bool _isLogin = false;
   bool _isAnonymousLogin = false;
+  bool _isProfanity = false;
+  bool _isTooShort = false;
 
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
@@ -107,46 +109,88 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 showDialog<String>(
                   context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Text(
-                      '닉네임 변경',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                      ),
-                    ),
-                    content: TextField(
-                        style: kTextFieldTextStyle,
-                        keyboardType: TextInputType.name,
-                        textAlign: TextAlign.center,
-                        onChanged: (value) {
-                          nickName = value;
-                        },
-                        decoration: kTextFieldDecoration.copyWith(
-                          hintText: '닉네임',
-                          icon: const FaIcon(
-                            FontAwesomeIcons.solidSmile,
-                            color: Colors.white,
-                            size: 25.0,
-                          ),
-                        )),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text(
-                          '취소',
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Change'),
-                        child: const Text(
-                          '변경',
+                  builder: (BuildContext context) => StatefulBuilder(
+                    builder: (context, setState) {
+                      return AlertDialog(
+                        title: const Text(
+                          '닉네임 변경',
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 30.0,
                           ),
                         ),
-                      ),
-                    ],
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                                style: kTextFieldTextStyle,
+                                keyboardType: TextInputType.name,
+                                textAlign: TextAlign.center,
+                                onChanged: (value) {
+                                  nickName = value;
+                                },
+                                decoration: kTextFieldDecoration.copyWith(
+                                  hintText: '닉네임',
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.solidSmile,
+                                    color: Colors.white,
+                                    size: 25.0,
+                                  ),
+                                )),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Visibility(
+                              visible: _isProfanity,
+                              child: const Text('다른 것으로 변경하세요'),
+                            ),
+                            Visibility(
+                              visible: _isTooShort,
+                              child: const Text('두 글자 이상으로 변경하세요'),
+                            ),
+                          ],
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              _isProfanity = false;
+                              _isTooShort = false;
+                              Navigator.pop(context, 'Cancel');
+                            },
+                            child: const Text(
+                              '취소',
+                              style: TextStyle(
+                                  fontSize: 20.0, color: Colors.white),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              _isProfanity = false;
+                              _isTooShort = false;
+                              final plusFilter =
+                                  ProfanityFilter.filterAdditionally(
+                                      customProfanityList);
+                              bool hasProfanity =
+                                  plusFilter.hasProfanity(nickName);
+                              if (hasProfanity) {
+                                _isProfanity = true;
+                                setState(() {});
+                              } else if (nickName.length <= 1) {
+                                _isTooShort = true;
+                                setState(() {});
+                              } else {
+                                Navigator.pop(context, 'Change');
+                              }
+                            },
+                            child: const Text(
+                              '변경',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ).then((returnVal) async {
                   if (returnVal == 'Change') {
@@ -185,32 +229,42 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: TextStyle(fontSize: 25.0),
               ),
               onTap: () async {
-                try {
-                  final GoogleSignInAccount? googleUser =
-                      await GoogleSignIn().signIn();
+                bool _isAgree = false;
+                var _popValue = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AgreeDialog()));
+                if (_popValue == true) {
+                  _isAgree = true;
+                }
+                if (_isAgree) {
+                  try {
+                    final GoogleSignInAccount? googleUser =
+                        await GoogleSignIn().signIn();
 
-                  // Obtain the auth details from the request
-                  final GoogleSignInAuthentication? googleAuth =
-                      await googleUser?.authentication;
+                    // Obtain the auth details from the request
+                    final GoogleSignInAuthentication? googleAuth =
+                        await googleUser?.authentication;
 
-                  // Create a new credential
-                  final credential = GoogleAuthProvider.credential(
-                    accessToken: googleAuth?.accessToken,
-                    idToken: googleAuth?.idToken,
-                  );
+                    // Create a new credential
+                    final credential = GoogleAuthProvider.credential(
+                      accessToken: googleAuth?.accessToken,
+                      idToken: googleAuth?.idToken,
+                    );
 
-                  if (_auth.currentUser != null) {
-                    final userCredential =
-                        await _auth.currentUser!.linkWithCredential(credential);
-                    if (userCredential.user != null) {
-                      Provider.of<UserData>(context, listen: false)
-                          .isAnonymousLogin = false;
-                      await Provider.of<UserData>(context, listen: false)
-                          .signInUserData(userCredential.user!);
+                    if (_auth.currentUser != null) {
+                      final userCredential = await _auth.currentUser!
+                          .linkWithCredential(credential);
+                      if (userCredential.user != null) {
+                        Provider.of<UserData>(context, listen: false)
+                            .isAnonymousLogin = false;
+                        await Provider.of<UserData>(context, listen: false)
+                            .signInUserData(userCredential.user!);
+                      }
                     }
+                  } catch (e) {
+                    print(e);
                   }
-                } catch (e) {
-                  print(e);
                 }
               },
             ),
@@ -250,7 +304,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
 
             ListTile(
-              enabled: _isLogin,
+              enabled: _isLogin && !_isAnonymousLogin,
               title: Text(
                 '회원 탈퇴',
                 style: TextStyle(fontSize: 25.0),

@@ -1,7 +1,5 @@
-import 'package:calculation_game/model/user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AnonymousLoginButton extends StatelessWidget {
   AnonymousLoginButton({Key? key, this.onTap}) : super(key: key);

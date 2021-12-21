@@ -1,9 +1,7 @@
 import 'package:calculation_game/constants.dart';
-import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/setting_screen.dart';
 import 'package:calculation_game/widget/reusable_card.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

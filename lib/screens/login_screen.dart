@@ -1,11 +1,9 @@
-import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/user_data.dart';
-import 'package:calculation_game/screens/main_screen.dart';
+import 'package:calculation_game/widget/agree_dialog.dart';
 import 'package:calculation_game/widget/anonymous_login_button.dart';
 import 'package:calculation_game/widget/google_login_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -56,38 +54,58 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 GoogleLoginButton(
                   onTap: () async {
-                    try {
-                      final userCredential = await signInWithGoogle();
-                      if (userCredential.additionalUserInfo != null) {
-                        await Provider.of<UserData>(context, listen: false)
-                            .isNewUserRegisterData(userCredential);
+                    bool _isAgree = false;
+                    var _popValue = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AgreeDialog()));
+                    if (_popValue == true) {
+                      _isAgree = true;
+                    }
+                    if (_isAgree) {
+                      try {
+                        final userCredential = await signInWithGoogle();
+                        if (userCredential.additionalUserInfo != null) {
+                          await Provider.of<UserData>(context, listen: false)
+                              .isNewUserRegisterData(userCredential);
+                        }
+                        if (userCredential.user != null) {
+                          await Provider.of<UserData>(context, listen: false)
+                              .signInUserData(userCredential.user!);
+                          Navigator.pop(context);
+                        }
+                      } catch (e) {
+                        print(e);
                       }
-                      if (userCredential.user != null) {
-                        await Provider.of<UserData>(context, listen: false)
-                            .signInUserData(userCredential.user!);
-                        Navigator.pop(context);
-                      }
-                    } catch (e) {
-                      print(e);
                     }
                   },
                 ),
                 AnonymousLoginButton(
                   onTap: () async {
-                    try {
-                      final userCredential = await _auth.signInAnonymously();
-                      print(userCredential);
-                      if (userCredential.additionalUserInfo != null) {
-                        await Provider.of<UserData>(context, listen: false)
-                            .isNewUserRegisterData(userCredential);
+                    bool _isAgree = false;
+                    var _popValue = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AgreeDialog()));
+                    if (_popValue == true) {
+                      _isAgree = true;
+                    }
+                    if (_isAgree) {
+                      try {
+                        final userCredential = await _auth.signInAnonymously();
+                        print(userCredential);
+                        if (userCredential.additionalUserInfo != null) {
+                          await Provider.of<UserData>(context, listen: false)
+                              .isNewUserRegisterData(userCredential);
+                        }
+                        if (userCredential.user != null) {
+                          await Provider.of<UserData>(context, listen: false)
+                              .signInUserData(userCredential.user!);
+                          Navigator.pop(context);
+                        }
+                      } catch (e) {
+                        print(e);
                       }
-                      if (userCredential.user != null) {
-                        await Provider.of<UserData>(context, listen: false)
-                            .signInUserData(userCredential.user!);
-                        Navigator.pop(context);
-                      }
-                    } catch (e) {
-                      print(e);
                     }
                   },
                 ),

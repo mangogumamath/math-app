@@ -2,9 +2,7 @@ import 'package:calculation_game/constants.dart';
 import 'package:calculation_game/model/admob.dart';
 import 'package:calculation_game/model/calculation_brain.dart';
 import 'package:calculation_game/screens/main_calculation_screens/main_add_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({Key? key}) : super(key: key);

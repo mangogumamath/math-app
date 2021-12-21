@@ -1,4 +1,5 @@
 import 'package:calculation_game/model/admob.dart';
+import 'package:calculation_game/model/profanity_text.dart';
 import 'package:calculation_game/model/user_data.dart';
 import 'package:calculation_game/screens/calculation_main_screen.dart';
 import 'package:calculation_game/screens/leaderboard_screen.dart';
@@ -6,6 +7,7 @@ import 'package:calculation_game/screens/my_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -26,52 +28,93 @@ class _MainScreenState extends State<MainScreen> {
   AdMob adMob = AdMob();
 
   String nickName = '';
+  bool _isProfanity = false;
+  bool _isTooShort = false;
 
   Future<void> nickNameNullCheck() async {
     if (Provider.of<UserData>(context, listen: false).userDataMap['nickName'] ==
         '') {
       await showDialog<String>(
         context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text(
-            '닉네임 설정',
-            style: TextStyle(
-              fontSize: 30.0,
-            ),
-          ),
-          content: TextField(
-              style: kTextFieldTextStyle,
-              keyboardType: TextInputType.name,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                nickName = value;
-              },
-              decoration: kTextFieldDecoration.copyWith(
-                hintText: '닉네임',
-                icon: const FaIcon(
-                  FontAwesomeIcons.solidSmile,
-                  color: Colors.white,
-                  size: 25.0,
-                ),
-              )),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text(
-                '취소',
-                style: TextStyle(fontSize: 20.0, color: Colors.white),
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Change'),
-              child: const Text(
-                '설정',
+        builder: (BuildContext context) => StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text(
+                '닉네임 설정',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 30.0,
                 ),
               ),
-            ),
-          ],
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                      style: kTextFieldTextStyle,
+                      keyboardType: TextInputType.name,
+                      textAlign: TextAlign.center,
+                      onChanged: (value) {
+                        nickName = value;
+                      },
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: '닉네임',
+                        icon: const FaIcon(
+                          FontAwesomeIcons.solidSmile,
+                          color: Colors.white,
+                          size: 25.0,
+                        ),
+                      )),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Visibility(
+                    visible: _isProfanity,
+                    child: const Text('다른 것으로 변경하세요'),
+                  ),
+                  Visibility(
+                    visible: _isTooShort,
+                    child: const Text('두 글자 이상으로 변경하세요'),
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    _isProfanity = false;
+                    _isTooShort = false;
+                    Navigator.pop(context, 'Cancel');
+                  },
+                  child: const Text(
+                    '나중에',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    _isProfanity = false;
+                    _isTooShort = false;
+                    final plusFilter =
+                        ProfanityFilter.filterAdditionally(customProfanityList);
+                    bool hasProfanity = plusFilter.hasProfanity(nickName);
+                    if (hasProfanity) {
+                      _isProfanity = true;
+                      setState(() {});
+                    } else if (nickName.length <= 1) {
+                      _isTooShort = true;
+                      setState(() {});
+                    } else {
+                      Navigator.pop(context, 'Change');
+                    }
+                  },
+                  child: const Text(
+                    '설정',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ).then((returnVal) async {
         if (returnVal == 'Change') {
@@ -80,7 +123,7 @@ class _MainScreenState extends State<MainScreen> {
                 .userDataMap['nickName'] = nickName;
             final uid = Provider.of<UserData>(context, listen: false)
                 .userDataMap['uid'];
-            await FirebaseFirestore.instance
+            FirebaseFirestore.instance
                 .collection('UserData')
                 .doc(uid)
                 .set({
